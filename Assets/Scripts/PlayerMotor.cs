@@ -1,19 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
-    public float speed = 5;
+    public float speed = 2.5f;
     
     public Camera cam;
     private float xRotation = 0;
 
-    public float xSensitivity = 30;
-    public float ySensitivity = 30;
+    public float xSensitivity = 20;
+    public float ySensitivity = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -40,5 +38,10 @@ public class PlayerMotor : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0); // Rotate the camera vertically
         transform.Rotate(Vector3.up * (input.x * Time.deltaTime) * xSensitivity); // Rotate the player (main camera) horizontally
+    }
+
+    public void ProcessZoom(Vector2 input)
+    {
+        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView - input.y, 20f, 120f);          
     }
 }
