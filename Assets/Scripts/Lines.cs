@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Lines : MonoBehaviour
 {
-    private LineRenderer lineRenderer; 
-    private GameObject origo;
+    private LineRenderer lineRenderer;
     [SerializeField] private GameObject line;
 
     private Vector3[] points = { new Vector3(-10, 0, 0), new Vector3(10, 0, 0) };
@@ -13,29 +12,31 @@ public class Lines : MonoBehaviour
     void Start()
     {
         lineRenderer = line.GetComponent<LineRenderer>();
-        for (int i = -8; i < 9; i+=2)
+        DrawLines();
+    }
+
+    void DrawLines()
+    {
+        lineRenderer.startWidth = lineRenderer.endWidth = 0.01f;
+        for (int i = -8; i < 9; i++)
         {
             points[0].z = points[1].z = i;
-
-            lineRenderer.SetPositions(points);
-            Instantiate(line, transform.position, transform.rotation);
+            DrawLine(points);
         }
         points[0].z = -10;
         points[1].z = 10;
         
-        for (int i = -8; i < 9; i+=2)
+        for (int i = -8; i < 9; i++)
         {
             points[0].x = points[1].x = i;
-
-            lineRenderer.SetPositions(points);
-            Instantiate(line, transform.position, transform.rotation);
+            DrawLine(points);
         }
     }
-
-    void Update()
+    
+    private void DrawLine(Vector3[] points)
     {
-
+        lineRenderer.startWidth = lineRenderer.endWidth = (points[0].x == 0 || points[0].z == 0) ? 0.05f : 0.01f;
+        lineRenderer.SetPositions(points);
+        Instantiate(line, transform.position, transform.rotation);
     }
-
-
 }

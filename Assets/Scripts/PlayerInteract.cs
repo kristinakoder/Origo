@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -8,25 +10,35 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private float distance = 10;
     [SerializeField] private LayerMask mask;
     private PlayerUI playerUI;
-    // Start is called before the first frame update
+    private InputManager inputManager;
+    [SerializeField] private GameObject interactionAction;
+    [SerializeField] private CubeInteractable cube;
+
     void Start()
     {
         cam = GetComponent<PlayerMotor>().cam;
         playerUI = GetComponent<PlayerUI>();
+        inputManager = GetComponent<InputManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        cube.MoveCube();
         playerUI.UpdateText("");
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * distance);
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, distance, mask))
         {
-            if(hitInfo.collider.GetComponent<Interactable>() != null)
+            Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+            if(interactable != null)
             {
-                playerUI.UpdateText(hitInfo.collider.GetComponent<Interactable>().promtMessage);
+                interactable.BaseInteract();
+                playerUI.UpdateText(interactable.promtMessage);
+                if (inputManager.noGravity.Interact.triggered)
+                {
+                    interactionAction.SetActive(true);
+                }
             }
         }
     }

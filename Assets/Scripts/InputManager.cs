@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private PlayerInput.NoGravityActions noGravity;
+    public PlayerInput.NoGravityActions noGravity;
     private PlayerMotor motor;
 
     void Awake()
@@ -11,6 +12,8 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInput();
         noGravity = playerInput.noGravity;
         motor = GetComponent<PlayerMotor>();
+        //noGravity.Interact.triggered += ctx => motor.Interact();
+        //noGravity.Interact.performed += ctx => motor.Interact();
     }
 
     void FixedUpdate()
