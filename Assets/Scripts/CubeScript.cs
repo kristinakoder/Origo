@@ -1,28 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class CubeScript : MonoBehaviour
 {
-    [SerializeField] private GameObject line;
-    private LineRenderer lineRenderer;
+    [SerializeField] public GameObject lineAD;
+    [SerializeField] public GameObject lineWS;
     [SerializeField] private GameObject selectVectorsScreen;
     [SerializeField] private GameObject glow;
-    [SerializeField] private GameUI gameUI;
+    [SerializeField] private VectorInput vectorInputs;
 
-    private bool CubeSelected = false, SelectedAD = false, SelectedWS = false;
+    private bool CubeSelected = false;
+    private bool isMoving = false;
+    bool wDown = false, aDown = false, sDown = false, dDown = false;
     
-    Vector3 moveAD = new(0,0,0);
-    Vector3 moveWS = new(0,0,0);
+    public Vector3 moveAD = new(0,0,0);
+    public Vector3 moveWS = new(0,0,0);
     Vector3 moveDir = Vector3.zero;
 
     void Start()
     {
-        gameUI.UpdateTextAD(MakeString(moveAD));
-        gameUI.UpdateTextWS(MakeString(moveWS));
-        gameUI = GetComponent<GameUI>();
-        lineRenderer = line.GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -45,105 +44,55 @@ public class CubeScript : MonoBehaviour
 
     void MoveCube()
     {
-        if (Input.GetKeyDown(KeyCode.A)) moveDir -= moveAD;
-        if (Input.GetKeyUp(KeyCode.A)) moveDir += moveAD;
-        if (Input.GetKeyDown(KeyCode.D)) moveDir += moveAD;
-        if (Input.GetKeyUp(KeyCode.D)) moveDir -= moveAD;
-
-        if (Input.GetKeyDown(KeyCode.W)) moveDir += moveWS;
-        if (Input.GetKeyUp(KeyCode.W)) moveDir -= moveWS;
-        if (Input.GetKeyDown(KeyCode.S)) moveDir -= moveWS;
-        if (Input.GetKeyUp(KeyCode.S)) moveDir += moveWS;
-
-        transform.position += moveDir * 5f * Time.deltaTime;
-    }
-
-    public void SelectAD()
-    {
-        SelectedAD = !SelectedAD;
-        if (SelectedWS) SelectedWS = false;
-    }
-
-    public void SelectWS()
-    {
-        SelectedWS = !SelectedWS;
-        if (SelectedAD) SelectedAD = false;
-    }
-
-    public void AddX()
-    {
-        if (!CubeSelected) 
+        if (Input.GetKeyDown(KeyCode.A)) 
         {
-            if (SelectedAD)
-            {
-                moveAD.x++;
-                gameUI.UpdateTextAD(MakeString(moveAD));
-            } 
-                
-            if (SelectedWS)
-            {
-                moveWS.x++;
-                gameUI.UpdateTextWS(MakeString(moveWS));
-            }
+            moveDir -= moveAD;
+            aDown = true;
         }
-    }
-
-    public void SubtractX()
-    {
-        if (!CubeSelected)
+        if (Input.GetKeyUp(KeyCode.A))
         {
-            if (SelectedAD)
-            {
-                moveAD.x--;
-                gameUI.UpdateTextAD(MakeString(moveAD));
-            } 
-                
-            if (SelectedWS)
-            {
-                moveWS.x--;
-                gameUI.UpdateTextWS(MakeString(moveWS));
-            }
-        }
-    }
-    
-    public void AddY()
-    {
-        if (!CubeSelected)
+            moveDir += moveAD;
+            aDown = false;
+        } 
+        if (Input.GetKeyDown(KeyCode.D)) 
         {
-            if (SelectedAD)
-            {
-                moveAD.z++;
-                gameUI.UpdateTextAD(MakeString(moveAD));
-            } 
-                
-            if (SelectedWS)
-            {
-                moveWS.z++;
-                gameUI.UpdateTextWS(MakeString(moveWS));
-            }
+            moveDir += moveAD;
+            dDown = true;
         }
-    }
-
-    public void SubtractY()
-    {
-        if (!CubeSelected)
+        if (Input.GetKeyUp(KeyCode.D))
         {
-            if (SelectedAD)
-            {
-                moveAD.z--;
-                gameUI.UpdateTextAD(MakeString(moveAD));
-            } 
-                
-            if (SelectedWS)
-            {
-                moveWS.z--;
-                gameUI.UpdateTextWS(MakeString(moveWS));
-            }
+            moveDir -= moveAD;
+            dDown = false;
+        } 
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            moveDir += moveWS;
+            wDown = true;
         }
-    }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            moveDir -= moveWS;
+            wDown = false;
+        } 
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            moveDir -= moveWS;
+            sDown = true;
+        } 
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            moveDir += moveWS;
+            sDown = false;
+        } 
 
-    string MakeString(Vector3 v)
-    {
-        return "(" + v.x + ", " + v.z + ")";
+        if (wDown || aDown || sDown || dDown) isMoving = true;
+        if (!wDown && !aDown && !sDown && !dDown) isMoving = false;
+
+        if (isMoving) 
+        {
+            transform.position += moveDir * 1f * Time.deltaTime;
+            vectorInputs.UpdateVectorAD();
+            vectorInputs.UpdateVectorWS();
+        }
     }
 }
