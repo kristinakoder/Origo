@@ -11,10 +11,11 @@ public class CubeScript : MonoBehaviour
     [SerializeField] private GameObject selectVectorsScreen;
     [SerializeField] private GameObject glow;
     [SerializeField] private VectorInput vectorInputs;
+    public Objectives tasks;
 
     private bool CubeSelected = false;
     private bool isMoving = false;
-    bool wDown = false, aDown = false, sDown = false, dDown = false;
+    bool wDown = false, aDown = false, sDown = false, dDown = false, aPressed = false, dPressed = false;
     
     public Vector3 moveAD = new(0,0,0);
     public Vector3 moveWS = new(0,0,0);
@@ -40,6 +41,12 @@ public class CubeScript : MonoBehaviour
     public void OnMouseDown()
     {
         CubeSelected = !CubeSelected;
+        if (tasks.tasks[0].isActive)
+        {
+            tasks.tasks[0].isActive = false;
+            tasks.tasks[1].isActive = true;
+            tasks.UpdateTask();
+        }
     }
 
     void MoveCube()
@@ -48,6 +55,12 @@ public class CubeScript : MonoBehaviour
         {
             moveDir -= moveAD;
             aDown = true;
+            if (tasks.tasks[2].isActive)
+            {
+                tasks.tasks[2].isActive = false;
+                tasks.tasks[3].isActive = true;
+                tasks.UpdateTask();
+            }
         }
         if (Input.GetKeyUp(KeyCode.A))
         {
@@ -58,6 +71,12 @@ public class CubeScript : MonoBehaviour
         {
             moveDir += moveAD;
             dDown = true;
+            if (tasks.tasks[2].isActive)
+            {
+                tasks.tasks[2].isActive = false;
+                tasks.tasks[3].isActive = true;
+                tasks.UpdateTask();
+            }
         }
         if (Input.GetKeyUp(KeyCode.D))
         {

@@ -75,10 +75,8 @@ public class CameraSystem : MonoBehaviour
 
     private void RotateCamera()
     {
-        float rotateYval = (Input.mousePosition.x - lastMousePosition.x) / 500;
-        rotateY += rotateYval; //rotateY horizontal
-        float rotateXval = (lastMousePosition.y - Input.mousePosition.y) / 500;
-        rotateX += rotateXval; //rotateX vertical
+        rotateY += (Input.mousePosition.x - lastMousePosition.x) / 500;; //rotateY horizontal
+        rotateX += (lastMousePosition.y - Input.mousePosition.y) / 500; //rotateX vertical
         rotateX = Mathf.Clamp(rotateX, -45, 45);
         //TODO: legge inn litt dødrom sånn at man ikke roterer bittelitt opp når man roterer til siden
 
@@ -90,10 +88,11 @@ public class CameraSystem : MonoBehaviour
         //men sånn fin flyvning, ikke sånn brått som det er nå
         //trenger å vite x, y og z... 
         //dersom de er negative, legge på litt float til 0, motsatt om positive..
+        rotateX = rotateY = 0;
         transform.position = Vector3.zero;
 
         //trenger å vite x og y. 
-        transform.rotation = Quaternion.Euler(0,0,0);
+        transform.rotation = Quaternion.Euler(rotateX,rotateY,0);
         
     }
 

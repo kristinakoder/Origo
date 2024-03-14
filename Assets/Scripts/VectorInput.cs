@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class VectorInput : MonoBehaviour
     LineRenderer lineRendererWS;
     Vector3[] pointsAD = new Vector3[] { new Vector3(0,0.05f,0), new Vector3(0,0.05f,0)};
     Vector3[] pointsWS = new Vector3[] { new Vector3(0,0.05f,0), new Vector3(0,0.05f,0)};
+    bool ADXchanged = false, ADYchanged = false;
+    public Objectives tasks;
 
     void Start()
     {
@@ -25,6 +28,13 @@ public class VectorInput : MonoBehaviour
         int.TryParse(input, out int a);
         cube.moveAD.x = a;
         UpdateVectorAD();
+        ADXchanged = true;
+        if (ADXchanged && ADYchanged && tasks.tasks[1].isActive)
+        { 
+            tasks.tasks[1].isActive = false;
+            tasks.tasks[2].isActive = true;
+            tasks.UpdateTask();
+        }
     }
 
     public void GetADY(string input)
@@ -32,6 +42,13 @@ public class VectorInput : MonoBehaviour
         int.TryParse(input, out int a);
         cube.moveAD.z = a;
         UpdateVectorAD();
+        ADYchanged = true;
+        if (ADXchanged && ADYchanged && tasks.tasks[1].isActive)
+        { 
+            tasks.tasks[1].isActive = false;
+            tasks.tasks[2].isActive = true;
+            tasks.UpdateTask();
+        }
     }
 
     public void UpdateVectorAD()

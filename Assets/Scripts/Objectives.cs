@@ -8,22 +8,34 @@ using UnityEngine.UI;
 public class Objectives : MonoBehaviour
 {
     [SerializeField] GameObject textPrefab;
+    public List<Task> tasks;
+    GameObject ny;
+    TextMeshProUGUI textMeshPro;
 
     int antall = 0;
 
     void Start()
     {
-        AddObjective("Trykk på kuben");
-        //AddObjective("Du må velge et negativt tall i en av dem");
-        //AddObjective("Du kan kun bruke hver av dem en gang");
+        foreach(Task t in tasks)
+        {
+            t.isActive = false;
+        }
+        tasks[0].isActive = true;
+        ny = Instantiate(textPrefab, transform); 
+        ny.transform.localPosition = new Vector3(-100, -100 - (antall * 90), 0f);
+        textMeshPro = ny.GetComponent<TextMeshProUGUI>();
+        //textMeshPro.text = tasks[0].description;
+        UpdateTask();
     }
 
-    void AddObjective(string description)
+    public void UpdateTask()
     {
-        GameObject ny = Instantiate(textPrefab, transform);     
-        ny.transform.localPosition = new Vector3(-100, -100 - (antall * 90), 0f);
-        TextMeshProUGUI textMeshPro = ny.GetComponent<TextMeshProUGUI>();
-        textMeshPro.text = description;
-        antall++;
+        foreach(Task t in tasks)
+        {
+            if(t.isActive)
+            {
+                textMeshPro.text = t.description;
+            }
+        }    
     }
 }
