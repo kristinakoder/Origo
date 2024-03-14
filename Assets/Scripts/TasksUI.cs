@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
-public class Objectives : MonoBehaviour
+public class TasksUI : MonoBehaviour
 {
-    [SerializeField] GameObject textPrefab;
-    [SerializeField] public List<TaskSO> objectives;
+    //skal vise tasks som er aktive
+    //skal oppdatere når det er nytt
+    public GameObject textPrefab;
+    public List<TaskSO> objectives;
     GameObject ny;
     TextMeshProUGUI textMeshPro;
 

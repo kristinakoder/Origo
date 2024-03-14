@@ -75,10 +75,8 @@ public class CameraSystem : MonoBehaviour
 
     private void RotateCamera()
     {
-        float rotateYval = (Input.mousePosition.x - lastMousePosition.x) / 500;
-        rotateY += rotateYval; //rotateY horizontal
-        float rotateXval = (lastMousePosition.y - Input.mousePosition.y) / 500;
-        rotateX += rotateXval; //rotateX vertical
+        rotateY += (Input.mousePosition.x - lastMousePosition.x) / 500;; //rotateY horizontal
+        rotateX += (lastMousePosition.y - Input.mousePosition.y) / 500;; //rotateX vertical
         rotateX = Mathf.Clamp(rotateX, -45, 45);
         //TODO: legge inn litt dødrom sånn at man ikke roterer bittelitt opp når man roterer til siden
 

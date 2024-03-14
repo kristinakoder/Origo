@@ -4,7 +4,8 @@ public class MenuScript : MonoBehaviour
 {    
     public void QuitGame()
     {
-        Debug.Log("clicked quit");
         Application.Quit();
     }
+
+    //her burde vel continue være? Legge det til som et GameEvent? :)
 }

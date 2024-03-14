@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class CubeScript : MonoBehaviour
+public class PlayableObject : MonoBehaviour
 {
-    [SerializeField] public GameObject lineAD;
-    [SerializeField] public GameObject lineWS;
-    [SerializeField] private GameObject selectVectorsScreen;
-    [SerializeField] private GameObject glow;
-    [SerializeField] private VectorInput vectorInputs;
+    [SerializeField] private GameObject selectVectorsScreen; //skal ikke ha denne
+    [SerializeField] private GameObject glow; 
+    [SerializeField] private VectorInput vectorInputs; //skal ikke ha denne
+    [SerializeField] private Objectives objectives; //skal ikke ha disse
+    public MoveVectors moveVectors; 
+    public UnityEvent playerClicked;
 
     private bool CubeSelected = false;
     private bool isMoving = false;
@@ -40,6 +42,13 @@ public class CubeScript : MonoBehaviour
     public void OnMouseDown()
     {
         CubeSelected = !CubeSelected;
+        playerClicked?.Invoke();
+        if (objectives.objectives[0].IsActive)
+        {
+            objectives.objectives[0].Complete();
+            objectives.objectives[1].IsActive = true;
+            objectives.ShowObjective();
+        } 
     }
 
     void MoveCube()
@@ -48,6 +57,12 @@ public class CubeScript : MonoBehaviour
         {
             moveDir -= moveAD;
             aDown = true;
+            if (objectives.objectives[2].IsActive) 
+            {
+                objectives.objectives[2].Complete();
+                objectives.objectives[3].IsActive = true;
+                objectives.ShowObjective();
+            }
         }
         if (Input.GetKeyUp(KeyCode.A))
         {
@@ -58,6 +73,12 @@ public class CubeScript : MonoBehaviour
         {
             moveDir += moveAD;
             dDown = true;
+            if (objectives.objectives[2].IsActive) 
+            {
+                objectives.objectives[2].Complete();
+                objectives.objectives[3].IsActive = true;
+                objectives.ShowObjective();
+            }
         }
         if (Input.GetKeyUp(KeyCode.D))
         {
