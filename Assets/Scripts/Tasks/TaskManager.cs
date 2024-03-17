@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
+    public GameEvent isClicked; //gir det mer mening å legge GameEventet i oppgave1?
+    public GameEventListener listener;
+
     //referanse til oppgavene - liste?
     //trenger metodene som skal kjøres når noe skjer
     //gameEventlisteners som skal kjøre rett metode.

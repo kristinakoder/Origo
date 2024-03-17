@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class GameEventListener : MonoBehaviour
 {
 		public GameEvent Event;
-		public UnityEvent Response; //UnityEvent to serialize the function call as the response*
+		public UnityEvent Response;
 		
 		private void OnEnable()
 		{ Event.RegisterListener(this); }

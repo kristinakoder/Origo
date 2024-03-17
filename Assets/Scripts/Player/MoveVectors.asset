@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ebf7b4210c14494db6ab3a98ad7b201, type: 3}
-  m_Name: MoveV
+  m_Script: {fileID: 11500000, guid: 7e953087ac3ff06479c17bee39e715c0, type: 3}
+  m_Name: MoveVectors
   m_EditorClassIdentifier: 
-  vector3: {x: 0, y: 0, z: 0}
+  V: {fileID: 11400000, guid: 9a8290a33b3c496449b4723234901a05, type: 2}
+  W: {fileID: 11400000, guid: 3437eec1005cb844884816b5c1be0443, type: 2}
