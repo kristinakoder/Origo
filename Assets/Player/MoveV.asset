@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
-  m_Name: Oppgave4
+  m_Script: {fileID: 11500000, guid: 1ebf7b4210c14494db6ab3a98ad7b201, type: 3}
+  m_Name: MoveV
   m_EditorClassIdentifier: 
-  _description: Se om kuben treffer punktet
+  Vec3: {x: 3, y: 0, z: 3}

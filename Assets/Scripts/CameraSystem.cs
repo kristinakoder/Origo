@@ -92,7 +92,6 @@ public class CameraSystem : MonoBehaviour
 
         //trenger å vite x og y. 
         transform.rotation = Quaternion.Euler(0,0,0);
-        
     }
 
     private void EdgeScrolling()

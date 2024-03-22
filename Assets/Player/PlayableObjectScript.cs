@@ -34,9 +34,8 @@ public class PlayableObjectScript : MonoBehaviour
         {
             glow.SetActive(true); 
             MoveCube();
-            isClicked?.Invoke();
-
-        } else 
+        } 
+        else 
         {
             glow.SetActive(false);
         }

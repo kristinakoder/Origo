@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
-  m_Name: Oppgave1
+  m_Script: {fileID: 11500000, guid: d5cc4472deb87714695ce42252c83de3, type: 3}
+  m_Name: OnTaskCompleteEffect
   m_EditorClassIdentifier: 
-  _description: "Klikk p\xE5 kulen i midten"
-  _isCompleted: 0
-  _isActive: 1
