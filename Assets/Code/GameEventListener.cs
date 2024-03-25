@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,5 +16,5 @@ public class GameEventListener : MonoBehaviour
 		{ Event.UnregisterListener(this); }
 		
 		public void OnEventRaised()
-		{ Response.Invoke(); }
+		{ Response?.Invoke(); }
 }

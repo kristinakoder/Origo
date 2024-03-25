@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Task", menuName = "Scriptable Objects/Task")]
-public class TaskSO : ScriptableObject //
+public class TaskSO : ScriptableObject 
 {
     public string Description;
     public bool IsCompleted;
     public bool IsActive;
     public int pointsRewarded;
-    //public UnityEvent SetActiveEvent; Nei, for da må hver referanse legges inn på hver GameEvent.asset..... Gah.. TaskManager?!
 
     public void Complete()
     {
@@ -21,6 +20,11 @@ public class TaskSO : ScriptableObject //
     public void SetActive()
     {
         IsActive = true;
-        //SetActiveEvent?.Invoke();
     }
+
+    public void Reset()
+    {
+        IsActive = false;
+        IsCompleted = false;
+    }   
 }

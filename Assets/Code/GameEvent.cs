@@ -13,7 +13,6 @@ public class GameEvent : ScriptableObject
 			listeners[i].OnEventRaised();
 	}
 
-	//skjønner ikke helt hva man skal med disse......
 	public void RegisterListener(GameEventListener listener) 
     {
         if (!listeners.Contains(listener))

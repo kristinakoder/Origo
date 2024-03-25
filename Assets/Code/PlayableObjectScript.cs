@@ -9,6 +9,7 @@ public class PlayableObjectScript : MonoBehaviour
 {
     [SerializeField] private GameObject glow; 
     public MoveVectors moveVectors;
+    public IntVariable points;
     public UnityEvent isClicked;
 
     private bool isSelected = false;
