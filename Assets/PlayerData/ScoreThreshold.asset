@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d74f9a6cedde56438709724f71d9607, type: 3}
   m_Name: ScoreThreshold
   m_EditorClassIdentifier: 
-  i: 7
+  i: 15

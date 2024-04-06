@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class CameraSystem : MonoBehaviour
@@ -13,9 +14,9 @@ public class CameraSystem : MonoBehaviour
     public TaskSO moveCameraTask;
     public TaskSO rotateCameraTask;
     public TaskSO backToDefaultViewTask;
-    public GameEvent onCameraMoved;
-    public GameEvent onCameraRotated;
-    public GameEvent onCameraDefaultView;      
+    public UnityEvent cameraMoved;
+    public UnityEvent cameraRotated;
+    public UnityEvent cameraDefaultView;      
     private bool isIngame = true;
     private bool rightMouseDown = false;
     private bool edgeScrollingOn = false;
@@ -23,7 +24,6 @@ public class CameraSystem : MonoBehaviour
     Vector2 lastMousePosition;
     Vector3 inputDir = Vector3.zero;
     float rotateX = 0, rotateY = 0;
-
 
     void Update()
     {
@@ -47,8 +47,12 @@ public class CameraSystem : MonoBehaviour
             }
             MoveCamera();
             if (rotate) RotetaCameraWithArrows();
+
             else MoveCameraWithArrows();
 
+            if (moveCameraTask.IsActive && !transform.position.Equals(Vector3.zero)) cameraMoved?.Invoke();
+            if (rotateCameraTask.IsActive && !transform.rotation.Equals(Quaternion.Euler(0,0,0))) cameraRotated?.Invoke();
+            if (backToDefaultViewTask.IsActive && Input.GetKey(KeyCode.C)) cameraDefaultView?.Invoke();
         } 
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
@@ -76,8 +80,8 @@ public class CameraSystem : MonoBehaviour
         //0.0 er bottom-left. Opp er y++, høyre x++
         inputDir.x = Input.mousePosition.x - lastMousePosition.x; 
         inputDir.z = Input.mousePosition.y - lastMousePosition.y;
-        inputDir /= 10f;
         
+        inputDir /= 10f;
         Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
         transform.position += moveDir * Time.deltaTime;
     }
