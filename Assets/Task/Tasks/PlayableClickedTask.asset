@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: "Trykk p\xE5 kulen i midten"
   IsCompleted: 1
-  IsActive: 1
+  IsActive: 0
   pointsRewarded: 1
-  SetTaskActiveEvent: {fileID: 11400000, guid: 8412dfb4b85d51e41b766766315381cd, type: 2}
+  hint: 

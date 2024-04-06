@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: Fyll inn verdier for vektor v
   IsCompleted: 0
-  IsActive: 0
+  IsActive: 1
   pointsRewarded: 1
-  SetTaskActiveEvent: {fileID: 11400000, guid: 8412dfb4b85d51e41b766766315381cd, type: 2}
+  hint: 

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
-  m_Name: CollideWithPointTask
+  m_Name: GetMorePointsTask
   m_EditorClassIdentifier: 
-  Description: Treff den andre kulen
+  Description: Samle flere poeng med kortest mulig vei
   IsCompleted: 0
   IsActive: 0
-  pointsRewarded: 5
-  hint: "Kanskje du m\xE5 endre V?"
+  pointsRewarded: 0
+  hint: 

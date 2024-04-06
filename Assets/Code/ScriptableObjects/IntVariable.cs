@@ -6,4 +6,14 @@ using UnityEngine;
 public class IntVariable : ScriptableObject
 {  
     public int i;      
+
+    public void Increment()
+    {
+        i++;
+    }
+
+    public void Reset()
+    {
+        i = 0;
+    }
 }

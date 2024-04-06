@@ -22,9 +22,7 @@ public class TaskUI : MonoBehaviour
     public void ShowActiveTask()
     {
         foreach (TaskSO task in allTasks.tasks)
-        {
             if (task.IsActive)
                 textMeshPro.text = task.Description;
-        }
     }
 }

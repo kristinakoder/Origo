@@ -9,7 +9,7 @@ public class TaskSO : ScriptableObject
     public string Description;
     public bool IsCompleted;
     public bool IsActive;
-    public int pointsRewarded;
+    public string hint;
 
     public void Complete()
     {

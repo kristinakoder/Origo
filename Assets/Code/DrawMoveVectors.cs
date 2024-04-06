@@ -9,14 +9,13 @@ public class DrawMoveVectors : MonoBehaviour
     public LineRenderer rendererW;
     Vector3 v, w;
 
-
-    void Start()
+    void Update() //#TODO: should be called only when the playable is moving
     {
         v = moveVectors.V.Vec3.normalized;
         w = moveVectors.W.Vec3.normalized;
 
         Vector3 startPoint = new (transform.position.x, 0.05f, transform.position.z);
-        rendererV.SetPositions(new Vector3[] { startPoint, new (v.x, 0.05f, v.z) });
-        rendererW.SetPositions(new Vector3[] { startPoint, new (w.x, 0.05f, w.z) });      
+        rendererV.SetPositions(new Vector3[] { startPoint, startPoint + new Vector3(v.x, 0.05f, v.z) });
+        rendererW.SetPositions(new Vector3[] { startPoint, startPoint + new Vector3(w.x, 0.05f, w.z) });
     }
 }

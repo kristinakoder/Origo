@@ -9,6 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d74f9a6cedde56438709724f71d9607, type: 3}
-  m_Name: Points
+  m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
+  m_Name: BackToDefaultViewTask
   m_EditorClassIdentifier: 
+  Description: "Trykk p\xE5 C for \xE5 komme tilbake til utgangspunktet"
+  IsCompleted: 0
+  IsActive: 0
+  hint: 

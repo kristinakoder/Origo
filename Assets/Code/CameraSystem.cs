@@ -2,14 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraSystem : MonoBehaviour
 {
     [SerializeField] private GameObject menuScreen;
     [SerializeField] private GameObject gameUI;
     [SerializeField] private GameObject crosshair;
+    public TaskSO moveCameraTask;
+    public TaskSO rotateCameraTask;
+    public TaskSO backToDefaultViewTask;
+    public GameEvent onCameraMoved;
+    public GameEvent onCameraRotated;
+    public GameEvent onCameraDefaultView;      
     private bool isIngame = true;
     private bool rightMouseDown = false;
     private bool edgeScrollingOn = false;
@@ -17,6 +23,7 @@ public class CameraSystem : MonoBehaviour
     Vector2 lastMousePosition;
     Vector3 inputDir = Vector3.zero;
     float rotateX = 0, rotateY = 0;
+
 
     void Update()
     {
@@ -39,6 +46,8 @@ public class CameraSystem : MonoBehaviour
                 crosshair.SetActive(false);
             }
             MoveCamera();
+            if (rotate) RotetaCameraWithArrows();
+            else MoveCameraWithArrows();
 
         } 
         if (Input.GetKeyDown(KeyCode.Escape)) 
@@ -88,9 +97,10 @@ public class CameraSystem : MonoBehaviour
         //men sånn fin flyvning, ikke sånn brått som det er nå
         //trenger å vite x, y og z... 
         //dersom de er negative, legge på litt float til 0, motsatt om positive..
+        //trenger å vite x og y. 
         transform.position = Vector3.zero;
 
-        //trenger å vite x og y. 
+        rotateY = rotateX = 0;
         transform.rotation = Quaternion.Euler(0,0,0);
     }
 
@@ -105,12 +115,35 @@ public class CameraSystem : MonoBehaviour
         if (Input.mousePosition.y > Screen.height - edgeScrollSize) inputDir.z = 1f;
 
         Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
-        transform.position += moveDir * 50f * Time.deltaTime;
+        transform.position += 50f * Time.deltaTime * moveDir;
+    }
+
+    private void MoveCameraWithArrows()
+    {
+        if (Input.GetKey(KeyCode.UpArrow)) transform.position += 10 * Time.deltaTime * transform.forward;
+        if (Input.GetKey(KeyCode.DownArrow)) transform.position -= 10 * Time.deltaTime * transform.forward;
+        if (Input.GetKey(KeyCode.LeftArrow)) transform.position -= 10 * Time.deltaTime * transform.right;
+        if (Input.GetKey(KeyCode.RightArrow)) transform.position += 10 * Time.deltaTime * transform.right;
+    }
+
+    private void RotetaCameraWithArrows()
+    {
+        if (Input.GetKey(KeyCode.UpArrow)) rotateX += 1;
+        if (Input.GetKey(KeyCode.DownArrow)) rotateX -= 1;
+        if (Input.GetKey(KeyCode.LeftArrow)) rotateY += 1;
+        if (Input.GetKey(KeyCode.RightArrow)) rotateY -= 1;
+
+        transform.rotation = Quaternion.Euler(rotateX, rotateY, 0f);
     }
 
     public void Continue()
     {
         isIngame = true;
         gameUI.SetActive(isIngame);
+    }
+
+    public void NewGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

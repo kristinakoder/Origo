@@ -3,51 +3,54 @@ using System.Collections.Generic;
 using System.Xml.Schema;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore;
 
 public class VectorInput : MonoBehaviour
 {
-    //denne skal håndtere når det blir tasta inn noe i inputBoksene. 
-    //tenker et annet script skal tegne vektorene. Heller playableObject hvertfall, hvis ikke et eget.
     public MoveVectors moveVectors;
+    public GameEvent OnAddVectors;
+    bool addedVX = false, addedVY = false;
 
-    float Vx
+    void Start()
     {
-        get { return moveVectors.V.Vec3.x; }
-        set { 
-            Vector3 temp = moveVectors.V.Vec3;
-            temp.x = value; 
-            moveVectors.V.Vec3 = temp;
+        moveVectors.V.Vec3 = moveVectors.W.Vec3 = Vector3.zero;
+    }
+
+    public void GetVX(string input) 
+    { 
+        if (int.TryParse(input, out int a)) 
+        {
+            moveVectors.V.Vec3.x = a;
+            if (!addedVX) 
+            {
+                addedVX = true;
+                VectorVAdded();
+            }
         }
     }
 
-    //kanskje like lett å bare gjøre dette for hver metode eller lignene. Ikke opprette hver variabel...
-
-    //Hadde vært kjekt med en metode som tar inn input og på en eller annen måte vet hvilken vektor og verdi den skal jobbe med... 
-    //Trenger vel et event? Kanskje?
-    
-    //en input er vx, en vy, en wx og en wy...
-
-    
-
-    public void GetADX(string input) 
-    {
-        int.TryParse(input, out int a);
+    public void GetVY(string input) 
+    { 
+        if (int.TryParse(input, out int a)) 
+        {
+            moveVectors.V.Vec3.z = a;
+            if (!addedVY) 
+            {
+                addedVY = true;
+                VectorVAdded();
+            }
+        }
     }
 
-    public void GetADY(string input)
-    {
-        int.TryParse(input, out int a); 
-    }
+    public void GetWX(string input)
+    { _ = int.TryParse(input, out int a) ? moveVectors.W.Vec3.x = a : 0; }
 
-    public void GetWSX(string input)
-    {
-        int.TryParse(input, out int a);
-        
-    }
+    public void GetWY(string input)
+    { _ = int.TryParse(input, out int a) ? moveVectors.W.Vec3.z = a : 0; }
 
-    public void GetWSY(string input)
-    {   
-        int.TryParse(input, out int a);
-        
+    public void VectorVAdded()
+    {
+        if (addedVX && addedVY)
+            OnAddVectors.Raise();
     }
 }

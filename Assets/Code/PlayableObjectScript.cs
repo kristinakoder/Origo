@@ -10,7 +10,10 @@ public class PlayableObjectScript : MonoBehaviour
     [SerializeField] private GameObject glow; 
     public MoveVectors moveVectors;
     public IntVariable points;
+    public TaskSO firstMoveTask;
     public UnityEvent isClicked;
+    public UnityEvent firstMove;
+    public UnityEvent sphereCollision;
 
     private bool isSelected = false;
 
@@ -27,6 +30,7 @@ public class PlayableObjectScript : MonoBehaviour
 
     void Start()
     {
+        points.i = 0;
     }
 
     void Update()
@@ -37,9 +41,7 @@ public class PlayableObjectScript : MonoBehaviour
             MoveCube();
         } 
         else 
-        {
             glow.SetActive(false);
-        }
     }
 
     public void OnMouseDown()
@@ -50,6 +52,8 @@ public class PlayableObjectScript : MonoBehaviour
 
     void MoveCube()
     {
+        if (firstMoveTask.IsActive && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))) firstMove?.Invoke();
+
         moveDir = Vector3.zero;
         if (Input.GetKey(KeyCode.A)) moveDir = -1 * MoveV;
         if (Input.GetKey(KeyCode.D)) moveDir = MoveV;     
@@ -57,5 +61,11 @@ public class PlayableObjectScript : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) moveDir = -1 * MoveW;
 
         transform.position += moveDir * 1f * Time.deltaTime;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Point")) 
+            sphereCollision?.Invoke();
     }
 }
