@@ -8,7 +8,7 @@ using UnityEngine.TextCore;
 public class VectorInput : MonoBehaviour
 {
     public MoveVectors moveVectors;
-    public GameEvent OnAddVectors;
+    public GameEvent onTaskComplete;
     bool addedVX = false, addedVY = false;
 
     void Start()
@@ -51,6 +51,11 @@ public class VectorInput : MonoBehaviour
     public void VectorVAdded()
     {
         if (addedVX && addedVY)
-            OnAddVectors.Raise();
+            onTaskComplete.Raise();
+    }
+
+    public void ResetVectors()
+    {
+        moveVectors.V.Vec3 = moveVectors.W.Vec3 = moveVectors.U.Vec3 = Vector3.zero;
     }
 }

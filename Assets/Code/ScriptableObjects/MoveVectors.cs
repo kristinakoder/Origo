@@ -7,4 +7,5 @@ public class MoveVectors : ScriptableObject //ScriptableObject er på en måte e
 {
     public Vector3Variable V;
     public Vector3Variable W;
+    public Vector3Variable U;
 }

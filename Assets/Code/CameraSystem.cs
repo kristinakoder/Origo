@@ -14,9 +14,7 @@ public class CameraSystem : MonoBehaviour
     public TaskSO moveCameraTask;
     public TaskSO rotateCameraTask;
     public TaskSO backToDefaultViewTask;
-    public UnityEvent cameraMoved;
-    public UnityEvent cameraRotated;
-    public UnityEvent cameraDefaultView;      
+    public GameEvent onTaskComplete;     
     private bool isIngame = true;
     private bool rightMouseDown = false;
     private bool edgeScrollingOn = false;
@@ -50,9 +48,9 @@ public class CameraSystem : MonoBehaviour
 
             else MoveCameraWithArrows();
 
-            if (moveCameraTask.IsActive && !transform.position.Equals(Vector3.zero)) cameraMoved?.Invoke();
-            if (rotateCameraTask.IsActive && !transform.rotation.Equals(Quaternion.Euler(0,0,0))) cameraRotated?.Invoke();
-            if (backToDefaultViewTask.IsActive && Input.GetKey(KeyCode.C)) cameraDefaultView?.Invoke();
+            if (moveCameraTask.IsActive && !transform.position.Equals(Vector3.zero)) onTaskComplete.Raise();
+            if (rotateCameraTask.IsActive && !transform.rotation.Equals(Quaternion.Euler(0,0,0))) onTaskComplete.Raise();
+            if (backToDefaultViewTask.IsActive && Input.GetKey(KeyCode.C)) onTaskComplete.Raise();
         } 
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
@@ -132,10 +130,10 @@ public class CameraSystem : MonoBehaviour
 
     private void RotetaCameraWithArrows()
     {
-        if (Input.GetKey(KeyCode.UpArrow)) rotateX += 1;
-        if (Input.GetKey(KeyCode.DownArrow)) rotateX -= 1;
-        if (Input.GetKey(KeyCode.LeftArrow)) rotateY += 1;
-        if (Input.GetKey(KeyCode.RightArrow)) rotateY -= 1;
+        if (Input.GetKey(KeyCode.UpArrow)) rotateX += 0.5f;
+        if (Input.GetKey(KeyCode.DownArrow)) rotateX -= 0.5f;
+        if (Input.GetKey(KeyCode.LeftArrow)) rotateY += 0.5f;
+        if (Input.GetKey(KeyCode.RightArrow)) rotateY -= 0.5f;
 
         transform.rotation = Quaternion.Euler(rotateX, rotateY, 0f);
     }

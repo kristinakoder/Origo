@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
   m_Name: GetToNextPointDirectlyTask
   m_EditorClassIdentifier: 
-  Description: "Se om du kan komme til neste punkt ved \xE5 endre vektoren \xE9n
-    gang"
-  IsCompleted: 0
-  IsActive: 1
+  Description: "Se om du kan komme til de neste punktene ved \xE5 endre vektoren
+    \xE9n gang hver"
+  IsCompleted: 1
+  IsActive: 0
   hint: 

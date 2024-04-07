@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
-  m_Name: PlayableClickedTask
+  m_Name: LockedVectorsTask
   m_EditorClassIdentifier: 
-  Description: "Trykk p\xE5 kulen i midten s\xE5 den lyser"
-  IsCompleted: 1
-  IsActive: 0
+  Description: "N\xE5 har du f\xE5tt to vektorer du ikke kan endre. Klarer du likevel
+    \xE5 f\xE5 kulen til de andre punktene? For \xE5 bruke vektor w kan du bruke
+    W eller S. Du kan trykke p\xE5 O for \xE5 komme tilbake til origo."
+  IsCompleted: 0
+  IsActive: 1
   hint: 

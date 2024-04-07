@@ -32,4 +32,14 @@ public class AllTasks : ScriptableObject
             }
         }
     }
+
+    public void StartAfterTutorial()
+    {
+        Reset();
+        for (int i = 0; i < 3; i++)
+        {
+            tasks[i].Complete();
+            tasks[i + 1].SetActive();
+        }
+    }
 }

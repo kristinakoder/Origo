@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
   m_Name: RotateCameraTask
   m_EditorClassIdentifier: 
-  Description: "Hold ctrl nede for \xE5 rotere i stedet for \xE5 flytte kameraet"
+  Description: "Hold ctrl nede og bruk piltaster eller h\xF8yre museknapp for \xE5
+    rotere"
   IsCompleted: 0
   IsActive: 0
   hint: 

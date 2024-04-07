@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
   m_Name: MoveCameraTask
   m_EditorClassIdentifier: 
-  Description: "Bruk piltaster eller trykk ned h\xF8yre musetast og dra for \xE5
-    flytte kamera"
+  Description: "Bruk piltaster eller hold nede h\xF8yre museknapp og dra for \xE5
+    flytte kameraet"
   IsCompleted: 0
-  IsActive: 0
+  IsActive: 1
   hint: 

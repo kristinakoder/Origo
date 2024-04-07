@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloorScript : MonoBehaviour
+public class RoomScript : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     [SerializeField] private GameObject line;
@@ -12,11 +12,19 @@ public class FloorScript : MonoBehaviour
     void Start()
     {
         lineRenderer = line.GetComponent<LineRenderer>();
-        DrawLines();
-        //DrawLines3D();
+        DrawLines3D();
     }
 
-    public void DrawLines()
+    public void DestroyLines()
+    {
+        GameObject[] lines = GameObject.FindGameObjectsWithTag("Line");
+        foreach (GameObject line in lines)
+        {
+            Destroy(line);
+        }
+    }
+
+    void DrawLines()
     {
         lineRenderer.startWidth = lineRenderer.endWidth = 0.01f;
         points[0].x = -10;
@@ -37,20 +45,8 @@ public class FloorScript : MonoBehaviour
         }
     }
 
-    public void DestroyLines()
-    {
-        GameObject[] lines = GameObject.FindGameObjectsWithTag("Line");
-        foreach (GameObject line in lines)
-        {
-            Destroy(line);
-        }
-    }
-
     public void DrawLines3D()
     {
-        lineRenderer = line.GetComponent<LineRenderer>();
-        points[0] = new Vector3(0, 0.03f, 0);
-        points[1] = new Vector3(10, 0.03f, 0);
         lineRenderer.startWidth = lineRenderer.endWidth = 0.01f;
         for (int i = 0; i < 10; i++)
         {

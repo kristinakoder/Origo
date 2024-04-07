@@ -11,6 +11,11 @@ public class PlayableObjectScript : MonoBehaviour
     public MoveVectors moveVectors;
     public IntVariable points;
     public TaskSO firstMoveTask;
+    public TaskSO firstCollisionTask;
+    public TaskSO secondCollisionTask;
+    public TaskSO clickPlayableTask;
+    public TaskSO lockedVectorsTask;
+    public GameEvent onTaskComplete;
     public UnityEvent isClicked;
     public UnityEvent firstMove;
     public UnityEvent sphereCollision;
@@ -25,6 +30,10 @@ public class PlayableObjectScript : MonoBehaviour
         get { return moveVectors.W.Vec3; }
         set { moveVectors.W.Vec3 = value; }
     }
+    Vector3 MoveU {
+        get { return moveVectors.U.Vec3; }
+        set { moveVectors.U.Vec3 = value; }
+    }
 
     Vector3 moveDir;
 
@@ -37,17 +46,19 @@ public class PlayableObjectScript : MonoBehaviour
     {
         if (isSelected)
         {
-            //glow.SetActive(true); 
+            glow.SetActive(true); 
             MoveCube();
         } 
         else 
             glow.SetActive(false);
+
+        if (Input.GetKey(KeyCode.O)) ResetPosition();
     }
 
     public void OnMouseDown()
     {
         isSelected = !isSelected;
-        isClicked?.Invoke();
+        if (clickPlayableTask.IsActive && isSelected) isClicked?.Invoke();
     }
 
     void MoveCube()
@@ -59,13 +70,47 @@ public class PlayableObjectScript : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) moveDir = MoveV;     
         if (Input.GetKey(KeyCode.W)) moveDir = MoveW;
         if (Input.GetKey(KeyCode.S)) moveDir = -1 * MoveW;
+        if (Input.GetKey(KeyCode.Space)) moveDir = 1 * MoveU;
+        if (Input.GetKey(KeyCode.LeftShift)) moveDir = -1* MoveU;
 
         transform.position += moveDir * 1f * Time.deltaTime;
+    }
+
+    public void StartVectorW()
+    {
+        MoveW = new Vector3(0, 0, 3);
+    }
+
+    public void SetLockedVectors()
+    {
+        MoveV = new Vector3(3,0,1);
+        MoveW = new Vector3(3,0,2);
+    }
+
+    public void Get3DmoveVectors()
+    {
+        MoveV = new Vector3(-5,0,0);
+        MoveW = new Vector3(0,0,-5);
+        MoveU = new Vector3(0,5,0);
+    }
+
+    public void SetPosition3D()
+    {
+        transform.position = new Vector3(5,5,5);
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = Vector3.zero;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Point")) 
+        {
             sphereCollision?.Invoke();
+            if (firstCollisionTask.IsActive || secondCollisionTask.IsActive || lockedVectorsTask.IsActive)
+                onTaskComplete.Raise();
+        }
     }
 }

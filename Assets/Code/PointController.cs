@@ -5,6 +5,8 @@ using UnityEngine;
 public class PointController : MonoBehaviour
 {
     int quadrant;
+    public TaskSO lockedVectors;
+    public GameObject playable;
 
     public void NewPosition()
     {
@@ -30,13 +32,18 @@ public class PointController : MonoBehaviour
             return 4;
     }
 
-    Vector3 newPosition(int quadrant)
+    public void SetPosition()
     {
+        transform.position = new Vector3(2, 0.02f, -1);
+    }
+
+    Vector3 newPosition(int quadrant)
+    {            
         int xPos, yPos;
 
         xPos = Random.Range(0, 10);
         yPos = Random.Range(0, 10);
-
+        
         switch(quadrant)
         {
             case 1: return new Vector3(-xPos, 0.02f, -yPos);

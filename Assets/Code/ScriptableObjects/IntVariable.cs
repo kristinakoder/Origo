@@ -8,12 +8,14 @@ public class IntVariable : ScriptableObject
     public int i;      
 
     public void Increment()
-    {
-        i++;
-    }
+    { i++; }
+
+    public void Decrement()
+    { i--; }
 
     public void Reset()
-    {
-        i = 0;
-    }
+    { i = 0; }
+
+    public void AddValue(int value)
+    { i += value; }   
 }
