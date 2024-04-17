@@ -13,17 +13,8 @@ MonoBehaviour:
   m_Name: AllTasks
   m_EditorClassIdentifier: 
   tasks:
-  - {fileID: 11400000, guid: f1f26b8458effd2458b5128385c871f9, type: 2}
-  - {fileID: 11400000, guid: e01f62da0d87cb246b8ac69762215839, type: 2}
-  - {fileID: 11400000, guid: 82b58599c9d1bed43bbcf523368cc39c, type: 2}
-  - {fileID: 11400000, guid: fe9fc8d00ab5c61479d5112dfb88047c, type: 2}
-  - {fileID: 11400000, guid: c26a33bc7760d2a4197c44a9d611e04e, type: 2}
-  - {fileID: 11400000, guid: 39d8a5e1971067a40ac532a8e222ea8a, type: 2}
   - {fileID: 11400000, guid: 7bc2ebe92167b314495aacd880e67290, type: 2}
   - {fileID: 11400000, guid: de7c6d0b43ea1a5499fd9b298aa2b36f, type: 2}
   - {fileID: 11400000, guid: ae11ee0b9755e6649ac47a53acb1aa21, type: 2}
   - {fileID: 11400000, guid: bff84b4f2c342cb4faf562a13fe9e6ef, type: 2}
   - {fileID: 11400000, guid: 859a5db34bc143e40982ecba37b266f7, type: 2}
-  - {fileID: 11400000, guid: 3553197b100d0e943805b1668837cab9, type: 2}
-  score: {fileID: 11400000, guid: c2c8e8d5819563a4f99acb209ad9f1b9, type: 2}
-  scoreThreshold: {fileID: 11400000, guid: 4bfe597daf98b8843889f67ff55a89fe, type: 2}

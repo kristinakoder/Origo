@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
   m_Name: CollideWithPointTask
   m_EditorClassIdentifier: 
-  Description: Treff den andre kulen
+  Description: "Treff den andre kulen med \xE5 endre vektor v \xE9n gang"
   IsCompleted: 0
-  IsActive: 0
-  pointsRewarded: 5
-  hint: "Kanskje du m\xE5 endre V?"
+  IsActive: 1
+  hint: 

@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: -53701859910207731}
   - component: {fileID: 7018788200437330330}
   - component: {fileID: 6929518164172032730}
+  - component: {fileID: 7884604149758486411}
   m_Layer: 0
   m_Name: Playable
   m_TagString: Player
@@ -126,7 +127,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8021046598873709000}
@@ -198,16 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6200addc1ddb4248abe93ae57ab9a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glow: {fileID: 362481893615357162}
   moveVectors: {fileID: 11400000, guid: d6a9ab3ce4da9fc46851d8e48c25418c, type: 2}
-  points: {fileID: 11400000, guid: c2c8e8d5819563a4f99acb209ad9f1b9, type: 2}
-  firstMoveTask: {fileID: 0}
-  firstCollisionTask: {fileID: 0}
-  secondCollisionTask: {fileID: 0}
-  isClicked:
+  sphereCollision:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 1cca720c785678b4b9d31ac7a3737f52, type: 2}
+      - m_Target: {fileID: 11400000, guid: 3d790b9c28413d045abcbca6841d82e9, type: 2}
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -219,15 +215,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  firstMove:
-    m_PersistentCalls:
-      m_Calls: []
-  sphereCollision:
-    m_PersistentCalls:
-      m_Calls: []
-  taskCollision:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1314186547486399676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +240,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -392,11 +379,39 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7884604149758486411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3286192420450250946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d411cb39d9f17e47ba79261e26a85f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 3d790b9c28413d045abcbca6841d82e9, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7018788200437330330}
+        m_TargetAssemblyTypeName: UnityEngine.TrailRenderer, UnityEngine
+        m_MethodName: Clear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &6957519375651924653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -448,50 +463,6 @@ PrefabInstance:
     - target: {fileID: 3424065104422272079, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
       propertyPath: m_Name
       value: LineW
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 2f6142f94a9aea449bfe9362b99fe4a4, type: 2}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Positions.Array.data[0].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Positions.Array.data[0].z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Positions.Array.data[1].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Positions.Array.data[1].z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0.9969425
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0.9969425
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.4857208
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -559,50 +530,6 @@ PrefabInstance:
     - target: {fileID: 3424065104422272079, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
       propertyPath: m_Name
       value: LineV
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 8dfd01ada9316844cafd713b6cffc189, type: 2}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Positions.Array.data[0].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Positions.Array.data[0].z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Positions.Array.data[1].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Positions.Array.data[1].z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.colorGradient.m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739690836409213912, guid: 7d33d27296f77164594f29d5d0e91172, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.5392868
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
