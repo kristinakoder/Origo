@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f748ac8c7acf51b4d9f1369bcb964cf7, type: 3}
   m_Name: CollideWithPointTask
   m_EditorClassIdentifier: 
-  Description: "Treff den andre kulen med \xE5 endre vektor v \xE9n gang"
+  Description: "Treff den andre kulen. Det koster ett poeng \xE5 endre en vektorverdi
+    og du f\xE5r tre poeng for \xE5 treffe."
   IsCompleted: 0
   IsActive: 1
-  hint: 
+  hint: Skalering og bruk av negativ vektor kan spare poeng

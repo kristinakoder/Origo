@@ -11,7 +11,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class LeaderboardScript : MonoBehaviour
 {
     public IntVariable score;
-
+    /*
     private async void Awake()
     {
         await UnityServices.InitializeAsync();
@@ -27,5 +27,5 @@ public class LeaderboardScript : MonoBehaviour
                 score.i,
                 new AddPlayerScoreOptions { Metadata = metadata });
         Debug.Log(JsonConvert.SerializeObject(playerEntry));
-    }
+    }*/
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Point
   - Line
+  - VirtualCamera
   layers:
   - Default
   - TransparentFX

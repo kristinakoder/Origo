@@ -6,6 +6,7 @@ public class PointController : MonoBehaviour
 {
     int quadrant;
     public GameObject playable;
+    public Vector3Variable pointPosition;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class PointController : MonoBehaviour
         do { newQuadrant = Random.Range(1, 5);
         } while (newQuadrant == quadrant);
         
+        pointPosition.Vec3 = transform.position;
         transform.position = newPosition(newQuadrant);
     }
 

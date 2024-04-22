@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,8 +10,11 @@ public class PlayableObjectScript : MonoBehaviour
 {
     public MoveVectors moveVectors;
     public Vector3Variable playablePosition;
+    public GameEvent onPlayableMove;
     public UnityEvent sphereCollision;
+    public BoolVariable isAddingVectors;
     Vector3 moveDir;
+    bool isMoving = true;
 
     Vector3 MoveV {
         get { return moveVectors.V.Vec3; }
@@ -25,7 +29,6 @@ public class PlayableObjectScript : MonoBehaviour
         set { moveVectors.U.Vec3 = value; }
     }
 
-
     void Start()
     {
         moveVectors.ResetVectors();
@@ -33,12 +36,20 @@ public class PlayableObjectScript : MonoBehaviour
 
     void Update()
     {
-        MoveCube();
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W) 
+            || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isMoving = true;
+            //onPlayableMove?.Raise();
+        }    
+            
+        if (isMoving && !isAddingVectors.b)
+            MovePlayable();
 
         if (Input.GetKey(KeyCode.O)) ResetPosition();
     }
 
-    void MoveCube()
+    void MovePlayable()
     {
         moveDir = Vector3.zero;
         if (Input.GetKey(KeyCode.A)) moveDir = -1 * MoveV;
@@ -47,7 +58,7 @@ public class PlayableObjectScript : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) moveDir = -1 * MoveW;
         if (Input.GetKey(KeyCode.Space)) moveDir = 1 * MoveU;
         if (Input.GetKey(KeyCode.LeftShift)) moveDir = -1* MoveU;
-
+        
         transform.position += moveDir * 1f * Time.deltaTime;
         playablePosition.Vec3 = transform.position;
     }
@@ -55,6 +66,7 @@ public class PlayableObjectScript : MonoBehaviour
     public void SnapPosition(Vector3Variable v)
     {
         transform.position = playablePosition.Vec3 = v.Vec3;
+        isMoving = false;
     }
 
     public void StartVectorW(int x, int y, int z)
