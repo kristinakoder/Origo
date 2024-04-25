@@ -6,6 +6,9 @@ using UnityEngine;
 public class VectorInputController : MonoBehaviour
 {
     public List<TMP_InputField> vectorInputs;
+    public MoveVectors moveVectors;
+    public TextMeshProUGUI vectorText;
+    public BoolVariable is3D;
 
     public void Update()
     {
@@ -39,5 +42,19 @@ public class VectorInputController : MonoBehaviour
             if (input.isFocused)
                 input.DeactivateInputField();
         }
+    }
+
+    public void SetRandom2DVectors()
+    {
+        moveVectors.V.Vec3 = new Vector3(Random.Range(-10, 11), Random.Range(-10, 11), Random.Range(-10, 11));
+        
+    }
+
+    public void SetVectorText()
+    {
+        if(is3D.b)
+            vectorText.text = " v:  [       ,       ,       ]";
+        else 
+            vectorText.text = " v:  [       ,       ]";
     }
 }

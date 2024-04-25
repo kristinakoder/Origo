@@ -7,15 +7,27 @@ public class PointController : MonoBehaviour
     int quadrant;
     public GameObject playable;
     public Vector3Variable pointPosition;
+    public BoolVariable is3D;
 
     void Start()
     {
+        is3D.b = false;
         NewPosition();
+        pointPosition.Vec3 = transform.position;
     }
-    /// <summary>
-    /// Set the position of the point to a new random position, that is not in the same quadrant as the player.
-    /// </summary>
+
     public void NewPosition()
+    {
+        if (is3D.b)
+            NewPosition3D();
+        else
+            NewPosition2D();
+    }
+
+    /// <summary>
+    /// Set the position of the point to a new random position for 2D, that is not in the same quadrant as the player.
+    /// </summary>
+    public void NewPosition2D()
     {
         quadrant = getQuadrant();
 
@@ -29,7 +41,7 @@ public class PointController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Get the quadrant of the point.
     /// </summary>
     /// <returns></returns>
     int getQuadrant()
@@ -44,11 +56,6 @@ public class PointController : MonoBehaviour
             return 4;
     }
 
-    public void SetPosition()
-    {
-        transform.position = new Vector3(2, 0.02f, -1);
-    }
-
     Vector3 newPosition(int quadrant)
     {            
         int xPos, yPos;
@@ -61,8 +68,13 @@ public class PointController : MonoBehaviour
             case 1: return new Vector3(-xPos, 0.02f, -yPos);
             case 2: return new Vector3(xPos, 0.02f, -yPos);
             case 3: return new Vector3(xPos, 0.02f, yPos);
-            case 4: return new Vector3(-xPos, 0.02f, yPos);
-            default: return new Vector3(-7, 0.02f, -3);
+            default: return new Vector3(-xPos, 0.02f, yPos);
         }
+    }
+
+    public void NewPosition3D()
+    {
+        pointPosition.Vec3 = transform.position;
+        transform.position = new Vector3(Random.Range(2, 10), Random.Range(2, 10), Random.Range(-9, -1));
     }
 }

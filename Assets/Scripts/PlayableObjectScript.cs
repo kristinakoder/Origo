@@ -12,9 +12,8 @@ public class PlayableObjectScript : MonoBehaviour
     public Vector3Variable playablePosition;
     public GameEvent onPlayableMove;
     public UnityEvent sphereCollision;
-    public BoolVariable isAddingVectors;
-    Vector3 moveDir;
-    bool isMoving = true;
+    public BoolVariable isAddingVector;
+    Vector3 moveDir; 
 
     Vector3 MoveV {
         get { return moveVectors.V.Vec3; }
@@ -32,21 +31,20 @@ public class PlayableObjectScript : MonoBehaviour
     void Start()
     {
         moveVectors.ResetVectors();
+        playablePosition.Vec3 = transform.position;
     }
 
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W) 
-            || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isMoving = true;
-            //onPlayableMove?.Raise();
-        }    
-            
-        if (isMoving && !isAddingVectors.b)
+    {            
+        if (!isAddingVector.b)
             MovePlayable();
 
         if (Input.GetKey(KeyCode.O)) ResetPosition();
+    }
+
+    public void MoveTo3DSpace()
+    {
+        transform.position = playablePosition.Vec3 = new Vector3(5, 5, -5);
     }
 
     void MovePlayable()
@@ -60,36 +58,16 @@ public class PlayableObjectScript : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift)) moveDir = -1* MoveU;
         
         transform.position += moveDir * 1f * Time.deltaTime;
-        playablePosition.Vec3 = transform.position;
     }
 
     public void SnapPosition(Vector3Variable v)
     {
         transform.position = playablePosition.Vec3 = v.Vec3;
-        isMoving = false;
     }
 
     public void StartVectorW(int x, int y, int z)
     {
         MoveW = new Vector3(x, y, z);
-    }
-
-    public void SetLockedVectors()
-    {
-        MoveV = new Vector3(3,0,1);
-        MoveW = new Vector3(3,0,2);
-    }
-
-    public void Get3DmoveVectors()
-    {
-        MoveV = new Vector3(-5,0,0);
-        MoveW = new Vector3(0,0,-5);
-        MoveU = new Vector3(0,5,0);
-    }
-
-    public void SetPosition3D()
-    {
-        transform.position = new Vector3(5,5,5);
     }
 
     public void ResetPosition()

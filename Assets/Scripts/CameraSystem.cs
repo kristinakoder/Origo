@@ -15,6 +15,7 @@ public class CameraSystem : MonoBehaviour
     private bool rightMouseDown = false;
     Vector2 lastMousePosition;
     Vector3 inputDir = Vector3.zero;
+    public BoolVariable is3D;
 
     float rotateX = 0, rotateY = 0;
 
@@ -69,17 +70,27 @@ public class CameraSystem : MonoBehaviour
 
     private void RotateCamera()
     {
-        rotateY += (Input.mousePosition.x - lastMousePosition.x) / 500;; //rotateY horizontal
-        rotateX += (lastMousePosition.y - Input.mousePosition.y) / 500;; //rotateX vertical
+        rotateY += (Input.mousePosition.x - lastMousePosition.x) / 500; //rotateY horizontal
+        rotateX += (lastMousePosition.y - Input.mousePosition.y) / 500; //rotateX vertical
         rotateX = Mathf.Clamp(rotateX, -90, 45);
 
         transform.rotation = Quaternion.Euler(rotateX, rotateY, 0f);
     }
 
-    private void DefaultCameraView()
+    public void DefaultCameraView()
     {
-        transform.position = Vector3.zero;
-        rotateY = rotateX = 0;
+        rotateX = 0;
+
+        if (!is3D.b) 
+        {
+            transform.position = Vector3.zero;
+            rotateY = 0;
+        }
+        else
+        {
+            rotateY = -35;
+            transform.position = new Vector3(0,3,0);
+        }
         RotateCamera();
     }
 
