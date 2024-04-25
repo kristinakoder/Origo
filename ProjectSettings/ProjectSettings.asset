@@ -763,11 +763,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: f3c074ca-2c67-4abd-8c09-e80674beec74
+  cloudProjectId: ea1aa387-9485-4b0a-8210-15342fdb622c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Origo 2024-02-01_19-28-21
-  organizationId: kristinao0
+  projectName: Origo
+  organizationId: kri_dah
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

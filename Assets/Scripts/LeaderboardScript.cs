@@ -1,31 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Authentication;
 using Unity.Services.Leaderboards;
-using Unity.Services.Leaderboards.Models;
-using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class LeaderboardScript : MonoBehaviour
-{
-    public IntVariable score;
-    /*
-    private async void Awake()
-    {
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
+/*
+//Initialize the Core SDK
+await UnityServices.InitializeAsync();
 
-    public async void AddScoreWithMetadata(string playerName)
-    {
-        var metadata = new Dictionary<string, string>() { {"name", playerName} };
-        var playerEntry = await LeaderboardsService.Instance
-            .AddPlayerScoreAsync(
-                "leaderboardID",
-                score.i,
-                new AddPlayerScoreOptions { Metadata = metadata });
-        Debug.Log(JsonConvert.SerializeObject(playerEntry));
-    }*/
-}
+//Sign in using the Authentication SDK - anonymous
+await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+//Call the leaderboard from the game
+var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync("Poengtavle");
+
+//Add a score to the leaderboard
+await LeaderboardsService.Instance.AddPlayerScoreAsync("Poengtavle", score);
+
+*/
