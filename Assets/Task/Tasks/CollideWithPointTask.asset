@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CollideWithPointTask
   m_EditorClassIdentifier: 
   Description: "Treff den andre kulen. Det koster ett poeng \xE5 endre en vektorverdi
-    og du f\xE5r tre poeng for \xE5 treffe."
+    og du f\xE5r fire poeng for \xE5 treffe."
   IsCompleted: 0
   IsActive: 1
-  hint: Skalering og bruk av negativ vektor kan spare poeng
+  hint: 'Hint: Skalering og bruk av negativ vektor kan spare poeng'

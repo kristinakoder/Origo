@@ -12,7 +12,6 @@ public class PlayableObjectScript : MonoBehaviour
     public Vector3Variable playablePosition;
     public GameEvent onPlayableMove;
     public UnityEvent sphereCollision;
-    public BoolVariable isAddingVector;
     Vector3 moveDir; 
 
     Vector3 MoveV {
@@ -36,8 +35,7 @@ public class PlayableObjectScript : MonoBehaviour
 
     void Update()
     {            
-        if (!isAddingVector.b)
-            MovePlayable();
+        MovePlayable();
 
         if (Input.GetKey(KeyCode.O)) ResetPosition();
     }

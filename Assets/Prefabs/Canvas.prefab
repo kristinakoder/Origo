@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 135955015147924843}
-  - component: {fileID: 1144500951786959483}
+  - component: {fileID: 2848941578384387}
   m_Layer: 5
   m_Name: Leaderboard
   m_TagString: Untagged
@@ -24,19 +24,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104775419807708366}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1680632547701887775}
+  m_Father: {fileID: 9018254930171557240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1144500951786959483
+--- !u!114 &2848941578384387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5430,6 +5430,7 @@ RectTransform:
   - {fileID: 7079613409787711547}
   - {fileID: 7834884186215071806}
   - {fileID: 9051357450307147564}
+  - {fileID: 135955015147924843}
   m_Father: {fileID: 1680632547701887775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9594,12 +9595,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8425348047591798244}
+  m_Father: {fileID: 1680632547701887775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 2042, y: -651}
+  m_SizeDelta: {x: 500, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1708106612436929355
 CanvasRenderer:
@@ -9694,7 +9695,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -1037.4907, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.5531921, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -10369,17 +10370,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5456987912698296003}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8425348047591798244}
+  m_Father: {fileID: 1680632547701887775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -418.83807, y: -308.322}
+  m_SizeDelta: {x: 698.3843, y: 494.8318}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5072872724036017596
 CanvasRenderer:
@@ -10476,7 +10477,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -99.727585, w: 0}
+  m_margin: {x: 0, y: 0, z: 3.4964905, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -10738,7 +10739,8 @@ RectTransform:
   m_Children:
   - {fileID: 9194464357810058344}
   - {fileID: 9018254930171557240}
-  - {fileID: 135955015147924843}
+  - {fileID: 2125151599131168862}
+  - {fileID: 8231769936966641196}
   - {fileID: 8425348047591798244}
   - {fileID: 8259217123656528924}
   m_Father: {fileID: 0}
@@ -12461,8 +12463,6 @@ RectTransform:
   - {fileID: 4021755694142703939}
   - {fileID: 3092892710433595281}
   - {fileID: 8967135012603901733}
-  - {fileID: 8231769936966641196}
-  - {fileID: 2125151599131168862}
   m_Father: {fileID: 1680632547701887775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

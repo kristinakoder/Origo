@@ -14,7 +14,7 @@ public class TaskUI : MonoBehaviour
     {
         allTasks.Reset();
         newText = Instantiate(textPrefab, transform); 
-        newText.transform.localPosition = new Vector3(0, -100, 0f); 
+        newText.transform.localPosition = new Vector3(-300, -100, 0f); 
         textMeshPro = newText.GetComponent<TextMeshProUGUI>();  
         ShowActiveTask();
     }

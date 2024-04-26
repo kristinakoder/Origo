@@ -10,6 +10,7 @@ public class HintController : MonoBehaviour
 
     TextMeshProUGUI textMeshPro;
     TaskSO activeTask;
+    bool isHintShown = false;
 
     void Start()
     {
@@ -21,7 +22,11 @@ public class HintController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             GetActiveTask();
-            ShowHint();
+            isHintShown = !isHintShown;
+            if (!isHintShown)
+                RemoveHint();
+            else
+                ShowHint();
         }
     }
 

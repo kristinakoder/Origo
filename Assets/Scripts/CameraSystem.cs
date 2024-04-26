@@ -40,7 +40,7 @@ public class CameraSystem : MonoBehaviour
             rightMouseDown = false;
             crosshair.SetActive(false);
         }
-        if (Input.GetKey(KeyCode.LeftControl)) RotateCameraWithArrows();
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftCommand)) RotateCameraWithArrows();
         else MoveCameraWithArrows();
     }
 
@@ -48,7 +48,7 @@ public class CameraSystem : MonoBehaviour
     {
         if (rightMouseDown)
         {        
-            if (Input.GetKey(KeyCode.LeftControl)) RotateCamera();
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftCommand)) RotateCamera();
             else DragCamera();
         }
         if (Input.GetKeyDown(KeyCode.C))
