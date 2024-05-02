@@ -5,8 +5,9 @@ using UnityEngine;
 public class PointController : MonoBehaviour
 {
     int quadrant;
-    public GameObject playable;
     public Vector3Variable pointPosition;
+    public Vector3Variable playablePosition;
+    public GameObject hinder;
     public BoolVariable is3D;
 
     void Start()
@@ -19,9 +20,13 @@ public class PointController : MonoBehaviour
     public void NewPosition()
     {
         if (is3D.b)
+        {
             NewPosition3D();
+        }
         else
+        {
             NewPosition2D();
+        }
     }
 
     /// <summary>
@@ -38,6 +43,11 @@ public class PointController : MonoBehaviour
         
         pointPosition.Vec3 = transform.position;
         transform.position = newPosition(newQuadrant);
+    }
+
+    public void SetHinderPosition()
+    {
+        hinder.transform.position = (transform.position + playablePosition.Vec3) / 2;
     }
 
     /// <summary>

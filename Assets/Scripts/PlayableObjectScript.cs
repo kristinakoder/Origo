@@ -5,39 +5,56 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayableObjectScript : MonoBehaviour
 {
-    public MoveVectors moveVectors;
-    public Vector3Variable playablePosition;
-    public GameEvent onPlayableMove;
-    public UnityEvent sphereCollision;
+    [SerializeField] private MoveVectors moveVectors;
+    [SerializeField] private Vector3Variable playablePosition;
+    [SerializeField] private BoolVariable canMove;
+    [SerializeField] private GameEvent onMoveVectorsUsed;
+    [SerializeField] private IntVariable addedScoreForCollision;
+    [SerializeField] private UnityEvent sphereCollision;
+
+    char lastVectorUsed = '?';
+
     Vector3 moveDir; 
 
-    Vector3 MoveV {
-        get { return moveVectors.V.Vec3; }
-        set { moveVectors.V.Vec3 = value; }
-    }
-    Vector3 MoveW {
-        get { return moveVectors.W.Vec3; }
-        set { moveVectors.W.Vec3 = value; }
-    }
-    Vector3 MoveU {
-        get { return moveVectors.U.Vec3; }
-        set { moveVectors.U.Vec3 = value; }
-    }
+    Vector3 MoveV => moveVectors.V.GetNormalized();
+    Vector3 MoveW => moveVectors.W.GetNormalized();
+    Vector3 MoveU => moveVectors.U.GetNormalized();
 
     void Start()
     {
+        canMove.b = false;
+        addedScoreForCollision.i = 5;
         moveVectors.ResetVectors();
         playablePosition.Vec3 = transform.position;
     }
 
     void Update()
-    {            
-        MovePlayable();
+    {   
+        if (canMove.b) 
+        {
+            if (lastVectorUsed != '?') DeductPointForVectorUse();
+            MovePlayable();
+        }
 
         if (Input.GetKey(KeyCode.O)) ResetPosition();
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return)) canMove.b = true;
+    }
+
+    private void DeductPointForVectorUse()
+    {
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) && lastVectorUsed != 'V') 
+            addedScoreForCollision.Decrement();
+
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) && lastVectorUsed != 'W') 
+            addedScoreForCollision.Decrement();
+
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift)) && lastVectorUsed != 'U') 
+            addedScoreForCollision.Decrement();
     }
 
     public void MoveTo3DSpace()
@@ -48,25 +65,53 @@ public class PlayableObjectScript : MonoBehaviour
     void MovePlayable()
     {
         moveDir = Vector3.zero;
-        if (Input.GetKey(KeyCode.A)) moveDir = -1 * MoveV;
-        if (Input.GetKey(KeyCode.D)) moveDir = MoveV;     
-        if (Input.GetKey(KeyCode.W)) moveDir = MoveW;
-        if (Input.GetKey(KeyCode.S)) moveDir = -1 * MoveW;
-        if (Input.GetKey(KeyCode.Space)) moveDir = 1 * MoveU;
-        if (Input.GetKey(KeyCode.LeftShift)) moveDir = -1* MoveU;
+        if (Input.GetKey(KeyCode.A)) 
+        {
+            moveDir = -1 * MoveV;
+            lastVectorUsed = 'V';
+        }
+        if (Input.GetKey(KeyCode.D)) 
+        {
+            moveDir = MoveV;
+            lastVectorUsed = 'V';
+        }
+        if (Input.GetKey(KeyCode.W)) 
+        {
+            moveDir = MoveW;
+            lastVectorUsed = 'W';
+        }
+        if (Input.GetKey(KeyCode.S)) 
+        {
+            moveDir = -1 * MoveW;
+            lastVectorUsed = 'W';
+        }
+        if (Input.GetKey(KeyCode.Space)) 
+        {
+            moveDir = 1 * MoveU;
+            lastVectorUsed = 'U';
+        }
+        if (Input.GetKey(KeyCode.LeftShift)) 
+        {
+            moveDir = -1* MoveU;
+            lastVectorUsed = 'U';
+        }
         
-        transform.position += moveDir * 1f * Time.deltaTime;
+        transform.position += moveDir * 8f * Time.deltaTime;
     }
 
+    /// <summary>
+    /// Snap the position of the playable to a given vector.
+    /// </summary>
+    /// <param name="v"></param>
     public void SnapPosition(Vector3Variable v)
     {
         transform.position = playablePosition.Vec3 = v.Vec3;
+        canMove.b = false;
     }
 
-    public void StartVectorW(int x, int y, int z)
-    {
-        MoveW = new Vector3(x, y, z);
-    }
+    //metode som gjør at playable stopper når den treffer der den skal
+    //når transform.position == playablePosition.Vec3 + MoveVector.V.Vec3 når man trykker A/D
+    //når skal den sjekke?
 
     public void ResetPosition()
     {
@@ -77,5 +122,13 @@ public class PlayableObjectScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Point")) 
         { sphereCollision?.Invoke(); }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Hinder")) 
+        {
+            addedScoreForCollision.Decrement();
+        }
     }
 }

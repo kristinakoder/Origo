@@ -8,10 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class CameraSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject menuScreen;
-    [SerializeField] private GameObject gameUI;
     [SerializeField] private GameObject crosshair;
-    GameObject virtualCamera;
     private bool rightMouseDown = false;
     Vector2 lastMousePosition;
     Vector3 inputDir = Vector3.zero;
