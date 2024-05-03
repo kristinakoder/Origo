@@ -85,6 +85,6 @@ public class PointController : MonoBehaviour
     public void NewPosition3D()
     {
         pointPosition.Vec3 = transform.position;
-        transform.position = new Vector3(Random.Range(2, 10), Random.Range(2, 10), Random.Range(-9, -1));
+        transform.position = new Vector3(Random.Range(2, 10), Random.Range(2, 5), Random.Range(-9, -1));
     }
 }

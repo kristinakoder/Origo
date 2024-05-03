@@ -6,25 +6,11 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "New Task", menuName = "Scriptable Objects/Task")]
 public class TaskSO : ScriptableObject 
 {
-    public string Description;
-    public bool IsCompleted;
-    public bool IsActive;
+    public string description;
     public string hint;
+    public bool IsActive,is3D,useV,useW,useU,useHinder,usePoint,lockVectors;
 
-    public void Complete()
-    {
-        IsActive = false;
-        IsCompleted = true;
-    }
+    public void SetActive() => IsActive = true;
 
-    public void SetActive()
-    {
-        IsActive = true;
-    }
-
-    public void Reset()
-    {
-        IsActive = false;
-        IsCompleted = false;
-    }   
+    public void Reset() => IsActive = false;
 }

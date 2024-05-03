@@ -11,7 +11,7 @@ public class PlayableObjectScript : MonoBehaviour
 {
     [SerializeField] private MoveVectors moveVectors;
     [SerializeField] private Vector3Variable playablePosition;
-    [SerializeField] private BoolVariable canMove;
+    [SerializeField] private BoolVariable canMove, isMoving;
     [SerializeField] private GameEvent onMoveVectorsUsed;
     [SerializeField] private IntVariable addedScoreForCollision;
     [SerializeField] private UnityEvent sphereCollision;
@@ -28,7 +28,7 @@ public class PlayableObjectScript : MonoBehaviour
     {
         canMove.b = false;
         addedScoreForCollision.i = 5;
-        moveVectors.ResetVectors();
+        //moveVectors.ResetVectors();
         playablePosition.Vec3 = transform.position;
     }
 
@@ -48,13 +48,13 @@ public class PlayableObjectScript : MonoBehaviour
     private void DeductPointForVectorUse()
     {
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) && lastVectorUsed != 'V') 
-            addedScoreForCollision.Decrement();
+            addedScoreForCollision.DecrementToMinOne();
 
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) && lastVectorUsed != 'W') 
-            addedScoreForCollision.Decrement();
+            addedScoreForCollision.DecrementToMinOne();
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift)) && lastVectorUsed != 'U') 
-            addedScoreForCollision.Decrement();
+            addedScoreForCollision.DecrementToMinOne();
     }
 
     public void MoveTo3DSpace()
@@ -95,6 +95,8 @@ public class PlayableObjectScript : MonoBehaviour
             moveDir = -1* MoveU;
             lastVectorUsed = 'U';
         }
+
+        isMoving.b = moveDir != Vector3.zero;
         
         transform.position += moveDir * 8f * Time.deltaTime;
     }
@@ -128,7 +130,7 @@ public class PlayableObjectScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hinder")) 
         {
-            addedScoreForCollision.Decrement();
+            addedScoreForCollision.DecrementToMinOne();
         }
     }
 }

@@ -14,18 +14,4 @@ public class AllTasks : ScriptableObject
         { task.Reset(); }
         tasks[0].SetActive();
     }
-
-    public void CompleteAndSetNextActive()
-    {
-        for(int i = 0; i < tasks.Count; i++)
-        {
-            if (tasks[i].IsActive)
-            {
-                tasks[i].Complete();
-                if (i < tasks.Count - 1)         
-                    tasks[i + 1].SetActive();
-                break;
-            }
-        }
-    }
 }

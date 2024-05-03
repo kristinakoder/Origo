@@ -26,13 +26,13 @@ public class HintController : MonoBehaviour
             if (!isHintShown)
                 RemoveHint();
             else
-                ShowHint();
+                ShowHints();
         }
     }
 
-    public void ShowHint()
+    public void ShowHints()
     {
-        textMeshPro.text = activeTask.hint;
+        textMeshPro.text = activeTask.hint;        
     }
 
     void GetActiveTask()

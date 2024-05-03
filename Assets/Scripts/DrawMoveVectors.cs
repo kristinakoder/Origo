@@ -1,21 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Compression;
 using UnityEngine;
 
 public class DrawMoveVectors : MonoBehaviour
 {
-    public MoveVectors moveVectors;
-    public LineRenderer rendererV; 
-    public LineRenderer rendererW;
-    Vector3 v, w;
+    [SerializeField] private MoveVectors moveVectors;
+    [SerializeField] private LineRenderer rendererV, rendererW, rendererU;
+    [SerializeField] private BoolVariable isMoving;
+    Vector3 v, w, u;
 
-    void Update() //#TODO: should be called only when Playable is moving?
+    void Update()
+    {
+        if (isMoving.b)
+            DrawVectors();
+    }
+
+    public void DrawVectors()
     {
         v = moveVectors.V.Vec3.normalized;
         w = moveVectors.W.Vec3.normalized;
+        u = moveVectors.U.Vec3.normalized;
 
-        Vector3 startPoint = new (transform.position.x, 0.05f, transform.position.z);
-        rendererV.SetPositions(new Vector3[] { startPoint, startPoint + new Vector3(v.x, 0.05f, v.z) });
-        rendererW.SetPositions(new Vector3[] { startPoint, startPoint + new Vector3(w.x, 0.05f, w.z) });
+        rendererV.SetPositions(new Vector3[] { transform.position, transform.position + new Vector3(v.x, v.y, v.z) });
+        rendererW.SetPositions(new Vector3[] { transform.position, transform.position + new Vector3(w.x, w.y, w.z) });
+        rendererU.SetPositions(new Vector3[] { transform.position, transform.position + new Vector3(u.x, u.y, u.z) });
     }
 }

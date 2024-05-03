@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.Leaderboards;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,14 +15,22 @@ public class VectorInputController : MonoBehaviour
     [SerializeField] private MoveVectors moveVectors;
     [SerializeField] private Vector3Variable pointPosition;
     [SerializeField] private Vector3Variable playablePosition;
-    [SerializeField] private BoolVariable is3D;
+    [SerializeField] private BoolVariable is3D, hinderTask;
+    [SerializeField] private GameObject continueButton;
 
     [SerializeField] private TextMeshProUGUI vectorTextV, vectorTextW, vectorTextU, buttonTextVX, buttonTextVY, 
-        buttonTextVZ, buttonTextWX, buttonTextWY, buttonTextWZ, buttonTextUX, buttonTextUY, buttonTextUZ;
+        buttonTextVZ, buttonTextWX, buttonTextWY, buttonTextWZ, buttonTextUX, buttonTextUY, buttonTextUZ, 
+        buttonChooseU0, buttonChooseU1, buttonChooseU2, buttonChooseU3, bracketTextV, bracketTextW, bracketTextU;
 
+    List<Vector3> choices;
     int buttonSelected = -1;
 
-    public void Update()
+    void Start()
+    {
+        moveVectors.ResetVectors();
+    }
+
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -44,6 +54,22 @@ public class VectorInputController : MonoBehaviour
         }   
     }
 
+    public void LockInputButtons()
+    {
+        foreach (Button button in vectorButtons)
+        {
+            button.interactable = false;
+        }
+    }
+
+    public void UnlockInputButtons()
+    {
+        foreach (Button button in vectorButtons)
+        {
+            button.interactable = true;
+        }
+    }
+
     public void SetRandom3DVectorV() => moveVectors.V.Vec3 = CreateRandom3DVector();
 
     public void SetRandom3DVectorW() => moveVectors.W.Vec3 = CreateRandom3DVector();
@@ -61,16 +87,70 @@ public class VectorInputController : MonoBehaviour
     /// </summary>
     public void SetTwoRandom2DVectors()
     {
-        moveVectors.V.Vec3 = CreateRandom2DVector();
-        moveVectors.W.Vec3 = CreateRandom2DVector();
-        while (IsLinearDependent(moveVectors.V.Vec3, moveVectors.W.Vec3))
+        if (hinderTask.b)
         {
+            moveVectors.V.Vec3 = CreateRandom2DVector();
             moveVectors.W.Vec3 = CreateRandom2DVector();
+            while (IsLinearDependent(moveVectors.V.Vec3, moveVectors.W.Vec3))
+            {
+                moveVectors.W.Vec3 = CreateRandom2DVector();
+            }
+            buttonTextVX.text = "" + moveVectors.V.Vec3.x;
+            buttonTextVY.text = "" + moveVectors.V.Vec3.z;
+            buttonTextWX.text = "" + moveVectors.W.Vec3.x;
+            buttonTextWY.text = "" + moveVectors.W.Vec3.z;
         }
-        buttonTextVX.text = "" + moveVectors.V.Vec3.x;
-        buttonTextVY.text = "" + moveVectors.V.Vec3.z;
-        buttonTextWX.text = "" + moveVectors.W.Vec3.x;
-        buttonTextWY.text = "" + moveVectors.W.Vec3.z;
+    }
+
+    public void ResetButtonText()
+    {
+        buttonTextVX.text = "0";
+        buttonTextVY.text = "0";
+        buttonTextVZ.text = "0";
+        buttonTextWX.text = "0";
+        buttonTextWY.text = "0";
+        buttonTextWZ.text = "0";
+        buttonTextUX.text = "0";
+        buttonTextUY.text = "0";
+        buttonTextUZ.text = "0";
+    }
+
+    public void ChooseVectorU(int i)
+    {
+        switch(i)
+        {
+            case 0:
+                moveVectors.U.Vec3 = choices[0];
+                buttonTextUX.text = "" + choices[0].x;
+                buttonTextUY.text = "" + choices[0].z;
+                buttonTextUZ.text = "" + choices[0].y;
+                break;
+            case 1:
+                moveVectors.U.Vec3 = choices[1];
+                buttonTextUX.text = "" + choices[1].x;
+                buttonTextUY.text = "" + choices[1].z;
+                buttonTextUZ.text = "" + choices[1].y;
+                break;
+            case 2:
+                moveVectors.U.Vec3 = choices[2];
+                buttonTextUX.text = "" + choices[2].x;
+                buttonTextUY.text = "" + choices[2].z;
+                buttonTextUZ.text = "" + choices[2].y;
+                break;
+            case 3:
+                moveVectors.U.Vec3 = choices[3];
+                buttonTextUX.text = "" + choices[3].x;
+                buttonTextUY.text = "" + choices[3].z;
+                buttonTextUZ.text = "" + choices[3].y;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void SetVectorText()
+    {
+        //TODO: Metode som setter rett text til knappene til vektorinput
     }
 
     /* NOT WORKING YET: pointPosition is not updated an is the same as playablePosition.
@@ -146,37 +226,89 @@ public class VectorInputController : MonoBehaviour
         else return b - a * Random.Range(1, 4);
     }
 
+    public void RightChoice()
+    {
+        if (!IsLinearDependent(moveVectors.V.Vec3, moveVectors.W.Vec3, moveVectors.U.Vec3))
+        {
+            continueButton.SetActive(true);
+        }
+    }
+
     /// <summary>
     /// Returns a list of five Vector3. The first vector randomly chosen, 3 of them a linear dependent to the first, 
     /// one is linear independent.
     /// </summary>
     /// <returns></returns>
-    private List<Vector3> CreateVectorChoices()
+    public void CreateAndSetVectorChoices()
     {
-        List<Vector3> choices = new List<Vector3>
-        {
-            CreateRandom3DVector(),
-            CreateRandom3DVector()
-        };
-        choices.Add(CreateLinearDependantVector(choices[0], choices[1]));
-        Vector3 a = CreateRandom3DVector();
-        while (IsLinearDependent(choices[0], choices[1], a))
-        {
-            a = CreateRandom3DVector();
-        }
-        choices.Add(a);
+        moveVectors.V.Vec3 = CreateRandom3DVector();
+        moveVectors.W.Vec3 = CreateRandom3DVector();
 
-        return choices;
+        while (moveVectors.V.Vec3.Equals(moveVectors.W.Vec3))
+        {
+            moveVectors.W.Vec3 = CreateRandom3DVector();
+        }
+
+        buttonTextVX.text = "" + moveVectors.V.Vec3.x;
+        buttonTextVY.text = "" + moveVectors.V.Vec3.y;
+        buttonTextVZ.text = "" + moveVectors.V.Vec3.z;
+        buttonTextWX.text = "" + moveVectors.W.Vec3.x;
+        buttonTextWY.text = "" + moveVectors.W.Vec3.y;
+        buttonTextWZ.text = "" + moveVectors.W.Vec3.z;
+
+        Vector3 a = CreateLinearDependantVector(moveVectors.V.Vec3, moveVectors.W.Vec3);
+        Vector3 b = CreateLinearDependantVector(a, moveVectors.W.Vec3);
+        while (b.Equals(a))
+        {
+            b = CreateLinearDependantVector(a, moveVectors.W.Vec3);
+        }
+        Vector3 c = CreateLinearDependantVector(a, b);
+        while (c.Equals(a) || c.Equals(b))
+        {
+            c = CreateLinearDependantVector(a, b);
+        }
+        Vector3 d = CreateRandom3DVector();
+        while (IsLinearDependent(a, b, d))
+        {
+            d = CreateRandom3DVector();
+        }
+
+        choices = new List<Vector3> {a, b, c, d};
+
+        Shuffle(choices);
+
+        buttonChooseU0.text = "[" + choices[0].x + ", " + choices[0].z + ", " + choices[0].y + "]";
+        buttonChooseU1.text = "[" + choices[1].x + ", " + choices[1].z + ", " + choices[1].y + "]";
+        buttonChooseU2.text = "[" + choices[2].x + ", " + choices[2].z + ", " + choices[2].y + "]";
+        buttonChooseU3.text = "[" + choices[3].x + ", " + choices[3].z + ", " + choices[3].y + "]";
     }
 
-/*
-    public void SetVectorText()
+    private void Shuffle(List<Vector3> list)
     {
-        if(is3D.b)
-            vectorText.text = "[       ,       ,       ]";
-        else 
-            vectorText.text = "[       ,       ]";
-    }*/
+        for (int i = 0; i < list.Count; i++)
+        {
+            Vector3 temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+    }
+
+    
+    public void SetBracketText3D()
+    {
+        bracketTextV.text = "[       ,       ,       ]";
+        bracketTextW.text = "[       ,       ,       ]";
+        bracketTextU.text = "[       ,       ,       ]";
+    }
+        
+    public void SetBracketText2D()
+    {
+        bracketTextV.text = "[       ,       ]";
+        bracketTextW.text = "[       ,       ]";
+        bracketTextU.text = "[       ,       ]";
+    }
+    
 
     /// <summary>
     /// Takes in a Vector3 and shortens it if possible.

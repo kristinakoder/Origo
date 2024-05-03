@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebf7b4210c14494db6ab3a98ad7b201, type: 3}
   m_Name: MoveU
   m_EditorClassIdentifier: 
-  Vec3: {x: 0, y: 5, z: 0}
+  _vec3: {x: 9, y: -28, z: 3}

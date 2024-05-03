@@ -13,7 +13,7 @@ public class TaskUI : MonoBehaviour
     void Start()
     {
         newText = Instantiate(textPrefab, transform); 
-        newText.transform.localPosition = new Vector3(-300, -100, 0f); 
+        newText.transform.localPosition = new Vector3(-250, -100, 0f); 
         textMeshPro = newText.GetComponent<TextMeshProUGUI>();  
         ShowActiveTask();
     }
@@ -22,6 +22,6 @@ public class TaskUI : MonoBehaviour
     {
         foreach (TaskSO task in allTasks.tasks)
             if (task.IsActive)
-                textMeshPro.text = task.Description;
+                textMeshPro.text = task.description;
     }
 }
