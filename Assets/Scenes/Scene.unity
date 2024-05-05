@@ -5435,9 +5435,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1894479951}
-        m_TargetAssemblyTypeName: UnityEngine.TrailRenderer, UnityEngine
-        m_MethodName: Clear
+      - m_Target: {fileID: 1894479948}
+        m_TargetAssemblyTypeName: PlayableObjectScript, Assembly-CSharp
+        m_MethodName: ResetPosition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5450,6 +5450,18 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: 69bbed31f8617864ab95350e449844cf, type: 2}
         m_TargetAssemblyTypeName: BoolVariable, Assembly-CSharp
         m_MethodName: SetTrue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1894479951}
+        m_TargetAssemblyTypeName: UnityEngine.TrailRenderer, UnityEngine
+        m_MethodName: Clear
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5947,7 +5959,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448625619}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.48708683, y: -0.000000015027258, z: 0.000000008381003, w: 0.8733536}
+  m_LocalRotation: {x: 0.48708683, y: 0.000000015027252, z: -0.000000008381, w: 0.8733536}
   m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7001,7 +7013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864721753}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.48708683, y: -0.000000015027258, z: 0.000000008381003, w: 0.8733536}
+  m_LocalRotation: {x: 0.48708683, y: 0.000000015027252, z: -0.000000008381, w: 0.8733536}
   m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8033,6 +8045,10 @@ PrefabInstance:
       propertyPath: onHinderTask
       value: 
       objectReference: {fileID: 11400000, guid: 1f188238ce32b634191cfad014f37093, type: 2}
+    - target: {fileID: 1364128661638346685, guid: 0e76a1ea92f832a4d97cb858d10fa52c, type: 3}
+      propertyPath: trailRenderer
+      value: 
+      objectReference: {fileID: 1894479951}
     - target: {fileID: 1364128661638346685, guid: 0e76a1ea92f832a4d97cb858d10fa52c, type: 3}
       propertyPath: onCollisionTask2D
       value: 

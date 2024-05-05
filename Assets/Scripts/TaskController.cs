@@ -58,7 +58,21 @@ public class TaskController : MonoBehaviour
             vectorInputControllerScript.ResetButtonText();
             onLinearIndependenceTask?.Raise();
         }
+        if (collisionCount.i == 10)
+        {
+            collisionCount.Increment();
+            moveVectors.ResetVectors();
+            vectorInputControllerScript.ResetButtonText();
+            onLinearIndependenceTask?.Raise();
+        }
         if (collisionCount.i == 12)
+        {
+            collisionCount.Increment();
+            moveVectors.ResetVectors();
+            vectorInputControllerScript.ResetButtonText();
+            onLinearIndependenceTask?.Raise();
+        }
+        if (collisionCount.i == 14)
         {
             allTasks.tasks[2].IsActive = false;
             allTasks.tasks[3].IsActive = true;
@@ -69,7 +83,7 @@ public class TaskController : MonoBehaviour
             vectorInputControllerScript.ResetButtonText();
             onHinderTask?.Raise();
         }
-        if (collisionCount.i >= 16)
+        if (collisionCount.i >= 18)
             endScreen.SetActive(true);
             scoreText.text = "Poengsum: " + score.i;
     }

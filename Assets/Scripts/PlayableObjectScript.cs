@@ -15,6 +15,7 @@ public class PlayableObjectScript : MonoBehaviour
     [SerializeField] private GameEvent onMoveVectorsUsed;
     [SerializeField] private IntVariable addedScoreForCollision;
     [SerializeField] private UnityEvent sphereCollision;
+    private DrawMoveVectors drawMoveVectors;
 
     char lastVectorUsed = '?';
 
@@ -30,6 +31,7 @@ public class PlayableObjectScript : MonoBehaviour
         addedScoreForCollision.i = 5;
         //moveVectors.ResetVectors();
         playablePosition.Vec3 = transform.position;
+        drawMoveVectors = GetComponent<DrawMoveVectors>();
     }
 
     void Update()
@@ -41,7 +43,6 @@ public class PlayableObjectScript : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.O)) ResetPosition();
-
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return)) canMove.b = true;
     }
 
@@ -118,6 +119,7 @@ public class PlayableObjectScript : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = playablePosition.Vec3 = Vector3.zero;
+        drawMoveVectors.DrawVectors();
     }
 
     void OnTriggerEnter(Collider other)
