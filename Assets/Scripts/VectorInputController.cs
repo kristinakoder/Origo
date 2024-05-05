@@ -148,6 +148,20 @@ public class VectorInputController : MonoBehaviour
         }
     }
 
+    private Vector3 GetNormalToPlane(Vector3 a, Vector3 b)
+    {
+        float x = a.y * b.z - a.z * b.y;
+        float y = a.z * b.x - a.x * b.z;
+        float z = a.x * b.y - a.y * b.x;
+        return new Vector3(x, y, z);
+    }
+
+    private float GetAngleBetweenVectors(Vector3 a, Vector3 b)
+    {
+        return Mathf.Acos(Vector3.Dot(a, b) / (a.magnitude * b.magnitude));
+    }
+    
+    
     private void SetVectorText()
     {
         //TODO: Metode som setter rett text til knappene til vektorinput
@@ -268,9 +282,13 @@ public class VectorInputController : MonoBehaviour
             c = CreateLinearDependantVector(a, b);
         }
         Vector3 d = CreateRandom3DVector();
-        while (IsLinearDependent(a, b, d))
+        Vector3 n = GetNormalToPlane(a, b);
+        float angle = GetAngleBetweenVectors(n, d);
+
+        while (angle > 1)
         {
             d = CreateRandom3DVector();
+            angle = GetAngleBetweenVectors(n, d);
         }
 
         choices = new List<Vector3> {a, b, c, d};

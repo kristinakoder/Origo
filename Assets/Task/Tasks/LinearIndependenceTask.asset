@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: LinearIndependenceTask
   m_EditorClassIdentifier: 
   description: "Her skal du ikke treffe noe, men velge den line\xE6rt uavhengige
-    vektoren. Du kan pr\xF8ve \xE5 bruke vektorene for \xE5 se om de beveger seg
-    i samme plan. Du styrer vektor w med W og S, og vektor u med space og shift."
-  hint: 
-  IsActive: 0
+    vektoren. Hvis du beveger deg rundt med WASD ser du at de to vektorene danner
+    et plan. Pr\xF8v s\xE5 \xE5 velge en vektor for u og se om den er i samme plan.
+    Du styrer u med space og shift. Husk at du kan f\xE5 hint ved \xE5 trykke p\xE5
+    H!"
+  hint: "En vektor er line\xE6rt avhengig av de andre vektorene hvis det er mulig
+    \xE5 uttrykke den som en kombinasjon av de andre! I tillegg kan du se at en vektor
+    er line\xE6rt uavhengig hvis den beveger seg utenfor planet som de andre vektorene
+    beveger seg i."
+  IsActive: 1
   is3D: 1
   useV: 1
   useW: 1

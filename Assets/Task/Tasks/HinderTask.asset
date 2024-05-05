@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: "Her kan du ikke g\xE5 direkte, s\xE5 du m\xE5 bruke to vektorer.
     For \xE5 f\xE5 mest mulig poeng, bruk vektorene f\xE6rrest mulig ganger. Du m\xE5
-    endre en verdi eller trykke enter for \xE5 bevege deg."
+    endre en verdi eller trykke enter for \xE5 bevege deg. Visste du at med to line\xE6rt
+    uavhengige vektorer kan du komme deg hvor som helst i planet?"
   hint: "Dersom vektorene er veldig like kan det l\xF8nne seg \xE5 endre en."
-  IsActive: 1
+  IsActive: 0
   is3D: 1
   useV: 1
   useW: 1

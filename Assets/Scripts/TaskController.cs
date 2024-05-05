@@ -16,8 +16,6 @@ public class TaskController : MonoBehaviour
     public IntVariable score;
     public TextMeshProUGUI scoreText;
 
-
-
     void Start()
     {
         collisionCount.Reset();
@@ -60,7 +58,7 @@ public class TaskController : MonoBehaviour
             vectorInputControllerScript.ResetButtonText();
             onLinearIndependenceTask?.Raise();
         }
-        if (collisionCount.i == 10)
+        if (collisionCount.i == 12)
         {
             allTasks.tasks[2].IsActive = false;
             allTasks.tasks[3].IsActive = true;
@@ -71,7 +69,7 @@ public class TaskController : MonoBehaviour
             vectorInputControllerScript.ResetButtonText();
             onHinderTask?.Raise();
         }
-        if (collisionCount.i >= 14)
+        if (collisionCount.i >= 16)
             endScreen.SetActive(true);
             scoreText.text = "Poengsum: " + score.i;
     }
