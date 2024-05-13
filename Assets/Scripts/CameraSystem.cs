@@ -10,8 +10,8 @@ public class CameraSystem : MonoBehaviour
 {
     [SerializeField] private GameObject crosshair;
     private bool rightMouseDown = false;
-    Vector2 lastMousePosition;
-    Vector3 inputDir = Vector3.zero;
+    private Vector2 lastMousePosition;
+    private Vector3 inputDir = Vector3.zero;
     public BoolVariable is3D;
 
     float rotateX = 0, rotateY = 0;
@@ -56,7 +56,6 @@ public class CameraSystem : MonoBehaviour
 
     private void DragCamera()
     {
-        //0.0 er bottom-left. Opp er y++, høyre x++
         inputDir.x = Input.mousePosition.x - lastMousePosition.x; 
         inputDir.z = Input.mousePosition.y - lastMousePosition.y;
         
@@ -67,8 +66,8 @@ public class CameraSystem : MonoBehaviour
 
     private void RotateCamera()
     {
-        rotateY += (Input.mousePosition.x - lastMousePosition.x) / 500; //rotateY horizontal
-        rotateX += (lastMousePosition.y - Input.mousePosition.y) / 500; //rotateX vertical
+        rotateY += (Input.mousePosition.x - lastMousePosition.x) / 500;
+        rotateX += (lastMousePosition.y - Input.mousePosition.y) / 500;
         rotateX = Mathf.Clamp(rotateX, -90, 45);
 
         transform.rotation = Quaternion.Euler(rotateX, rotateY, 0f);
@@ -108,10 +107,5 @@ public class CameraSystem : MonoBehaviour
         rotateX = Mathf.Clamp(rotateX, -90, 45);
 
         transform.rotation = Quaternion.Euler(rotateX, rotateY, 0f);
-    }
-
-    private void Zoom()
-    {
-        
     }
 }

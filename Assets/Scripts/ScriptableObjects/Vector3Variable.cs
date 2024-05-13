@@ -33,10 +33,16 @@ public class Vector3Variable : ScriptableObject
     public void SetValueZ(string s) => _ = int.TryParse(s, out int a) ? _vec3.y = a : 0;
 
     /// <summary>
-    ///  Set a new vector with a given vector.
+    ///  Set a new vector with a given Vector3.
     /// </summary>
     /// <param name="v"></param>
     public void SetVector(Vector3 v) => _vec3 = v;
+
+    /// <summary>
+    ///  Set a new vector with a given Vector3Variable.
+    /// </summary>
+    /// <param name="v"></param>
+    public void SetVector(Vector3Variable v) => _vec3 = v.Vec3;
 
     /// <summary>
     /// Get normalized vector.
@@ -47,5 +53,4 @@ public class Vector3Variable : ScriptableObject
         normalized.Normalize();
         return normalized;
     }
-
 }

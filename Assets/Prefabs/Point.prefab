@@ -203,7 +203,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6596250116883941637
 MonoBehaviour:
@@ -217,10 +217,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b86a56d348ac7b4b8ad0882de175cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointPosition: {fileID: 0}
-  playablePosition: {fileID: 0}
-  hinder: {fileID: 0}
-  is3D: {fileID: 0}
+  pointPosition: {fileID: 11400000, guid: a6bba546d2db51d438c75003e83575f4, type: 2}
+  playablePosition: {fileID: 11400000, guid: 8fb252bf25abee14482ad19b073eac7c, type: 2}
+  hinder: {fileID: 1284255486545724239}
+  is3D: {fileID: 11400000, guid: f410a83c241af6f4493b9b85588625c1, type: 2}
 --- !u!114 &2638608049015444397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +240,18 @@ MonoBehaviour:
       - m_Target: {fileID: 6596250116883941637}
         m_TargetAssemblyTypeName: PointController, Assembly-CSharp
         m_MethodName: NewPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6596250116883941637}
+        m_TargetAssemblyTypeName: PointController, Assembly-CSharp
+        m_MethodName: SetHinderPosition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -623,6 +635,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e250f7e803547c4e9c0f694a05005fb, type: 3}
+--- !u!1 &1284255486545724239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5285738821256392499, guid: 4e250f7e803547c4e9c0f694a05005fb, type: 3}
+  m_PrefabInstance: {fileID: 6379385140956441724}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2037939278257853948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4953983803497200000, guid: 4e250f7e803547c4e9c0f694a05005fb, type: 3}

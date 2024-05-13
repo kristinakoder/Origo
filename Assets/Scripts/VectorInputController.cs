@@ -70,18 +70,6 @@ public class VectorInputController : MonoBehaviour
         }
     }
 
-    public void SetRandom3DVectorV() => moveVectors.V.Vec3 = CreateRandom3DVector();
-
-    public void SetRandom3DVectorW() => moveVectors.W.Vec3 = CreateRandom3DVector();
-
-    public void SetRandom3DVectorU() => moveVectors.U.Vec3 = CreateRandom3DVector();
-
-    public void SetRandom2DVectorV() => moveVectors.V.Vec3 = CreateRandom2DVector();
-
-    public void SetRandom2DVectorW() => moveVectors.W.Vec3 = CreateRandom2DVector();
-
-    public void SetRandom2DVectorU() => moveVectors.U.Vec3 = CreateRandom2DVector();
-
     /// <summary>
     /// Sets vectors V and W to random 2D vectors that are linear independent.
     /// </summary>
@@ -159,15 +147,8 @@ public class VectorInputController : MonoBehaviour
     private float GetAngleBetweenVectors(Vector3 a, Vector3 b)
     {
         return Mathf.Acos(Vector3.Dot(a, b) / (a.magnitude * b.magnitude));
-    }
-    
-    
-    private void SetVectorText()
-    {
-        //TODO: Metode som setter rett text til knappene til vektorinput
-    }
+    }  
 
-    /* NOT WORKING YET: pointPosition is not updated an is the same as playablePosition.
     /// <summary>
     /// Creates a random 2D vector that doesn't go directly towards the target point, sets it to V and sets 
     /// W to [0, random]. 
@@ -176,8 +157,8 @@ public class VectorInputController : MonoBehaviour
     {
         Vector3 newVector = CreateRandom2DVector();
         Vector3 vectorToPoint = pointPosition.Vec3 - playablePosition.Vec3;
-        if (IsLinearDependent2D(newVector, vectorToPoint))
-            newVector.x = newVector.x * -1;
+        if (IsLinearDependent(newVector, vectorToPoint))
+            newVector.x *= -1;
         
         moveVectors.V.Vec3 = newVector;
         Vector3 newW = CreateRandom2DVector();
@@ -187,7 +168,7 @@ public class VectorInputController : MonoBehaviour
         buttonTextVY.text = "" + newVector.z;
         buttonTextWX.text = "0";
         buttonTextWY.text = "" + newW.z;
-    }*/
+    }
 
     private int Determinant(Vector3 a, Vector3 b)
     {
@@ -227,13 +208,8 @@ public class VectorInputController : MonoBehaviour
         return new Vector3(Random.Range(-10, 11), 0, Random.Range(-10, 11));
     }
 
-    /// <summary>
-    /// Creates and returns a vector3 that is linear dependant on the two given vectors.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    private Vector3 CreateLinearDependantVector(Vector3 a, Vector3 b)
+    /// <summary> Creates and returns a Vector3 that is linear dependent on the two given vectors.</summary>
+    private Vector3 CreateLinearDependentVector(Vector3 a, Vector3 b)
     {
         if (a.magnitude > b.magnitude) return a - b * Random.Range(1, 4);
         
@@ -258,28 +234,28 @@ public class VectorInputController : MonoBehaviour
         moveVectors.V.Vec3 = CreateRandom3DVector();
         moveVectors.W.Vec3 = CreateRandom3DVector();
 
-        while (moveVectors.V.Vec3.Equals(moveVectors.W.Vec3))
+        while (IsLinearDependent(moveVectors.V.Vec3, moveVectors.W.Vec3))
         {
             moveVectors.W.Vec3 = CreateRandom3DVector();
         }
 
         buttonTextVX.text = "" + moveVectors.V.Vec3.x;
-        buttonTextVY.text = "" + moveVectors.V.Vec3.y;
-        buttonTextVZ.text = "" + moveVectors.V.Vec3.z;
+        buttonTextVY.text = "" + moveVectors.V.Vec3.z;
+        buttonTextVZ.text = "" + moveVectors.V.Vec3.y;
         buttonTextWX.text = "" + moveVectors.W.Vec3.x;
-        buttonTextWY.text = "" + moveVectors.W.Vec3.y;
-        buttonTextWZ.text = "" + moveVectors.W.Vec3.z;
+        buttonTextWY.text = "" + moveVectors.W.Vec3.z;
+        buttonTextWZ.text = "" + moveVectors.W.Vec3.y;
 
-        Vector3 a = CreateLinearDependantVector(moveVectors.V.Vec3, moveVectors.W.Vec3);
-        Vector3 b = CreateLinearDependantVector(a, moveVectors.W.Vec3);
+        Vector3 a = CreateLinearDependentVector(moveVectors.V.Vec3, moveVectors.W.Vec3);
+        Vector3 b = CreateLinearDependentVector(a, moveVectors.W.Vec3);
         while (b.Equals(a))
         {
-            b = CreateLinearDependantVector(a, moveVectors.W.Vec3);
+            b = CreateLinearDependentVector(a, moveVectors.W.Vec3);
         }
-        Vector3 c = CreateLinearDependantVector(a, b);
+        Vector3 c = CreateLinearDependentVector(a, b);
         while (c.Equals(a) || c.Equals(b))
         {
-            c = CreateLinearDependantVector(a, b);
+            c = CreateLinearDependentVector(a, b);
         }
         Vector3 d = CreateRandom3DVector();
         Vector3 n = GetNormalToPlane(a, b);
@@ -312,7 +288,6 @@ public class VectorInputController : MonoBehaviour
         }
     }
 
-    
     public void SetBracketText3D()
     {
         bracketTextV.text = "[       ,       ,       ]";

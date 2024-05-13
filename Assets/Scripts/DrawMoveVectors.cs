@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Compression;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class DrawMoveVectors : MonoBehaviour
@@ -18,9 +19,9 @@ public class DrawMoveVectors : MonoBehaviour
 
     public void DrawVectors()
     {
-        v = moveVectors.V.Vec3.normalized;
-        w = moveVectors.W.Vec3.normalized;
-        u = moveVectors.U.Vec3.normalized;
+        v = moveVectors.V.GetNormalized();
+        w = moveVectors.W.GetNormalized();
+        u = moveVectors.U.GetNormalized();
 
         rendererV.SetPositions(new Vector3[] { transform.position, transform.position + new Vector3(v.x, v.y, v.z) });
         rendererW.SetPositions(new Vector3[] { transform.position, transform.position + new Vector3(w.x, w.y, w.z) });

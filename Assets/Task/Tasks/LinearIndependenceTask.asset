@@ -21,7 +21,7 @@ MonoBehaviour:
     \xE5 uttrykke den som en kombinasjon av de andre! I tillegg kan du se at en vektor
     er line\xE6rt uavhengig hvis den beveger seg utenfor planet som de andre vektorene
     beveger seg i."
-  IsActive: 1
+  IsActive: 0
   is3D: 1
   useV: 1
   useW: 1

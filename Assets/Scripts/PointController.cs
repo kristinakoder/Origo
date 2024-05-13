@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PointController : MonoBehaviour
 {
+    //Maybe find a way to maximize and minimize distance to playable?
+    [SerializeField] private Vector3Variable pointPosition;
+    [SerializeField] private  Vector3Variable playablePosition;
+    [SerializeField] private  GameObject hinder;
+    [SerializeField] private  BoolVariable is3D;
+    
     int quadrant;
-    public Vector3Variable pointPosition;
-    public Vector3Variable playablePosition;
-    public GameObject hinder;
-    public BoolVariable is3D;
 
     void Start()
     {
-        is3D.b = false;
+        is3D.b = false; 
         NewPosition();
         pointPosition.Vec3 = transform.position;
     }
@@ -41,14 +43,10 @@ public class PointController : MonoBehaviour
         do { newQuadrant = Random.Range(1, 5);
         } while (newQuadrant == quadrant);
         
-        pointPosition.Vec3 = transform.position;
-        transform.position = newPosition(newQuadrant);
+        pointPosition.Vec3 = transform.position = newPosition(newQuadrant);
     }
 
-    public void SetHinderPosition()
-    {
-        hinder.transform.position = (transform.position + playablePosition.Vec3) / 2;
-    }
+    public void SetHinderPosition() => hinder.transform.position = (transform.position + playablePosition.Vec3) / 2;
 
     /// <summary>
     /// Get the quadrant of the point.
@@ -84,7 +82,6 @@ public class PointController : MonoBehaviour
 
     public void NewPosition3D()
     {
-        pointPosition.Vec3 = transform.position;
-        transform.position = new Vector3(Random.Range(2, 10), Random.Range(2, 5), Random.Range(-9, -1));
+        pointPosition.Vec3 = transform.position = new Vector3(Random.Range(2, 10), Random.Range(2, 5), Random.Range(-9, -1));
     }
 }

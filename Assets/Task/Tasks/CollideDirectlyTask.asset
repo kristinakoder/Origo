@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: "Skriv inn en vektor v for \xE5 kunne flytte den store kulen til den
     lille. Trykk p\xE5 verdien du \xF8nsker \xE5 endre eller bruk tab og enter. D
-    flytter kulen i positiv retning, A i negativ. For \xE5 f\xE5 mest poeng pr\xF8v
+    flytter kulen i positiv retning, A i negativ. For \xE5 f\xE5 flest poeng pr\xF8v
     \xE5 endre vektorverdiene f\xE6rrest mulig ganger."
-  hint: Skalering og bruk av negativ vektor kan spare poeng
-  IsActive: 1
+  hint: Skalering og bruk av negativ vektor kan gi flere poeng
+  IsActive: 0
   is3D: 0
   useV: 1
   useW: 0
-  useU: 0
+  useU: 1
   useHinder: 0
   usePoint: 1
   lockVectors: 0

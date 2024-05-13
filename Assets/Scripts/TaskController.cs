@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class TaskController : MonoBehaviour
 {
+    //find a better way of handling this: Maybe a state-machine for tasks?
     [SerializeField] private IntVariable collisionCount;
     [SerializeField] private AllTasks allTasks;
     [SerializeField] private GameEvent onCollisionTask2D, onCollisionTask3D, onHinderTask, onLinearIndependenceTask;
     [SerializeField] private BoolVariable is3D, hindertask;
     [SerializeField] private MoveVectors moveVectors;
     [SerializeField] private GameObject vectorInputController;
+    [SerializeField] private GameObject endScreen;
+    [SerializeField] private IntVariable score;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    
     private VectorInputController vectorInputControllerScript;
-    public GameObject endScreen;
-    public IntVariable score;
-    public TextMeshProUGUI scoreText;
 
     void Start()
     {

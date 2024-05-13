@@ -14,4 +14,11 @@ public class AllTasks : ScriptableObject
         { task.Reset(); }
         tasks[0].SetActive();
     }
+
+    public void ChooseRandomTask()
+    {
+        Reset();
+        int randomIndex = Random.Range(0, tasks.Count);
+        tasks[randomIndex].SetActive();
+    }
 }
