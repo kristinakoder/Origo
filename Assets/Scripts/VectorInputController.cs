@@ -211,9 +211,14 @@ public class VectorInputController : MonoBehaviour
     /// <summary> Creates and returns a Vector3 that is linear dependent on the two given vectors.</summary>
     private Vector3 CreateLinearDependentVector(Vector3 a, Vector3 b)
     {
-        if (a.magnitude > b.magnitude) return a - b * Random.Range(1, 4);
+        if (VectorAbsSum(a) > VectorAbsSum(b)) return a - b * Random.Range(1, 3);
         
-        else return b - a * Random.Range(1, 4);
+        else return b - a * Random.Range(1, 3);
+    }
+
+    private int VectorAbsSum(Vector3 v)
+    {
+        return (int) (Math.Abs(v.x) + Math.Abs(v.y) + Math.Abs(v.z));
     }
 
     public void RightChoice()
