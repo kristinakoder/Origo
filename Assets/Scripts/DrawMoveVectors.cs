@@ -13,8 +13,7 @@ public class DrawMoveVectors : MonoBehaviour
 
     void Update()
     {
-        if (isMoving.b)
-            DrawVectors();
+        if (isMoving.b) DrawVectors();
     }
 
     public void DrawVectors()

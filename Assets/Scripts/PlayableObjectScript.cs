@@ -105,16 +105,12 @@ public class PlayableObjectScript : MonoBehaviour
     /// <summary>
     /// Snap the position of the playable to a given vector.
     /// </summary>
-    /// <param name="v"></param>
-    public void SnapPosition(Vector3Variable v)
+    public void SnapPosition()
     {
-        transform.position = playablePosition.Vec3 = v.Vec3;
+        transform.position = new(Mathf.Round(transform.position.x),  Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
+        playablePosition.Vec3 = transform.position;
         canMove.b = false;
     }
-
-    //metode som gjør at playable stopper når den treffer der den skal
-    //når transform.position == playablePosition.Vec3 + MoveVector.V.Vec3 når man trykker A/D
-    //når skal den sjekke?
 
     public void ResetPosition()
     {
@@ -125,7 +121,12 @@ public class PlayableObjectScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Point")) 
-        { sphereCollision?.Invoke(); }
+        { 
+            transform.position = new(Mathf.Round(transform.position.x),  Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
+            playablePosition.Vec3 = transform.position;
+            canMove.b = false;
+            sphereCollision?.Invoke(); 
+        }
     }
 
     void OnCollisionEnter(Collision collision)
